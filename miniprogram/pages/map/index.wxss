@@ -1,0 +1,497 @@
+/* Fix Issue 1: Force Full Screen Map */
+page {
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling on the body */
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.main-map {
+  width: 100%;
+  height: 100%;
+  position: absolute; /* Force absolute positioning */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Lowest level */
+}
+
+/* Fix Issue 2: Backdrop Blur Effect */
+.backdrop-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0); /* Start transparent */
+  backdrop-filter: blur(0px);
+  z-index: 50; /* Above map/mini-card, Below detail-sheet (which is 60) */
+  pointer-events: none; /* Let clicks pass through when hidden */
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.backdrop-layer.active {
+  background: rgba(0, 0, 0, 0.4); /* Darken */
+  backdrop-filter: blur(12px) brightness(0.8); /* Blur + Darken specifically for iOS/Modern Android */
+  pointer-events: auto; /* Catch clicks to close modal */
+}
+
+/* Custom Nav */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  padding: 0 48rpx;
+  height: 96rpx;
+  pointer-events: none;
+}
+
+.nav-back {
+  width: 96rpx;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20rpx);
+  border-radius: 50%;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+}
+
+.back-icon {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+/* State 1: Mini Button */
+.mini-button {
+  position: fixed;
+  bottom: 192rpx;
+  right: 48rpx;
+  width: 128rpx;
+  height: 128rpx;
+  background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.2);
+  border: 2rpx solid rgba(0, 0, 0, 0.05);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.poker-deck-icon {
+  position: relative;
+  width: 64rpx;
+  height: 64rpx;
+  margin-bottom: 8rpx;
+}
+
+.deck-card-mini {
+  position: absolute;
+  width: 40rpx;
+  height: 52rpx;
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  border-radius: 6rpx;
+  border: 2rpx solid #FFF;
+}
+
+.deck-1 {
+  transform: rotate(-10deg) translate(-8rpx, 0);
+  opacity: 0.4;
+}
+
+.deck-2 {
+  transform: rotate(-5deg) translate(-4rpx, 0);
+  opacity: 0.7;
+}
+
+.deck-3 {
+  transform: rotate(0deg);
+}
+
+.mini-text {
+  font-size: 20rpx;
+  font-weight: bold;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1rpx;
+}
+
+/* State 2: Browse Deck - Zenguide Style */
+.browse-container {
+  position: fixed;
+  bottom: 180rpx; /* Increased to clear custom tab bar */
+  left: 0;
+  right: 0;
+  z-index: 40;
+}
+
+.deck-area {
+  position: relative;
+  width: 100%;
+  height: 640rpx;
+}
+
+.deck-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 576rpx;
+  margin-left: -288rpx;
+  margin-top: -320rpx; /* Adjusted for visual balance */
+  aspect-ratio: 4/5;
+  background: #FFFFFF; /* Solid white like reference */
+  border-radius: 48rpx;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.deck-card.active {
+  box-shadow: 0 48rpx 120rpx rgba(0, 0, 0, 0.3);
+}
+
+.card-image-section {
+  height: 67%;
+  width: 100%;
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 48rpx;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.card-text-section {
+  height: 33%;
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.card-play-icon {
+  font-size: 32rpx;
+  color: #4A90E2;
+}
+
+.card-distance {
+  font-size: 22rpx;
+  color: #888;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+.card-explore {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.explore-text {
+  font-size: 24rpx;
+  color: #4A90E2;
+  font-weight: bold;
+}
+
+.explore-arrow {
+  font-size: 24rpx;
+  color: #4A90E2;
+}
+
+/* State 3: Detail Sheet */
+.detail-sheet {
+  position: fixed;
+  top: 15vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #FFFFFF;
+  border-radius: 80rpx 80rpx 0 0;
+  box-shadow: 0 -16rpx 64rpx rgba(0, 0, 0, 0.15);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  animation: slideUpDetail 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUpDetail {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.detail-handle {
+  position: absolute;
+  top: -5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96rpx;
+  height: 8rpx;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8rpx;
+}
+
+.detail-nav {
+  padding: 48rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.detail-close {
+  width: 80rpx;
+  height: 80rpx;
+  background: #F5F5F5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-icon {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 32rpx;
+}
+
+.action-btn {
+  width: 80rpx;
+  height: 80rpx;
+  background: #F5F5F5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+}
+
+.detail-scroll {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.detail-hero {
+  position: relative;
+  width: calc(100% - 96rpx);
+  margin: 0 48rpx 64rpx;
+  aspect-ratio: 4/5;
+  border-radius: 48rpx;
+  overflow: hidden;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.15);
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 48rpx;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.hero-title {
+  display: block;
+  font-size: 56rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+  margin-bottom: 12rpx;
+}
+
+.hero-subtitle {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Audio Player */
+.audio-player {
+  background: #EBF5FF;
+  border-radius: 48rpx;
+  padding: 48rpx;
+  margin: 0 48rpx 64rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.audio-left {
+  display: flex;
+  gap: 32rpx;
+  align-items: center;
+}
+
+.audio-play-btn {
+  width: 96rpx;
+  height: 96rpx;
+  background: #4A90E2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.4);
+}
+
+.play-icon-large {
+  font-size: 32rpx;
+  color: #FFFFFF;
+  margin-left: 6rpx;
+}
+
+.audio-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.audio-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1a3a5c;
+}
+
+.audio-subtitle {
+  font-size: 22rpx;
+  color: rgba(74, 144, 226, 0.7);
+}
+
+.audio-waveform {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  height: 64rpx;
+}
+
+.wave-bar {
+  width: 6rpx;
+  background: #4A90E2;
+  border-radius: 6rpx;
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+.wave-bar:nth-child(odd) { animation-delay: 0.1s; }
+.wave-bar:nth-child(even) { animation-delay: 0.3s; }
+
+@keyframes wave {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Content */
+.detail-content {
+  padding: 0 48rpx 280rpx;
+}
+
+.content-section {
+  display: flex;
+  gap: 32rpx;
+  margin-bottom: 48rpx;
+}
+
+.section-indicator {
+  width: 8rpx;
+  min-height: 64rpx;
+  background: #4A90E2;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+}
+
+.section-text {
+  flex: 1;
+  font-size: 36rpx;
+  line-height: 1.7;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.content-body {
+  margin-top: 48rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 32rpx;
+}
+
+.body-text {
+  font-size: 30rpx;
+  line-height: 1.8;
+  color: #666;
+}
+
+.quote-block {
+  border-left: 8rpx solid #E8E8E8;
+  padding: 24rpx 32rpx;
+  background: #F9F9F9;
+  border-radius: 8rpx;
+}
+
+.quote-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #888;
+  font-style: italic;
+}
+
+.navigate-button {
+  width: 100%;
+  height: 96rpx;
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  border-radius: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.4);
+  margin-top: 48rpx;
+}
+
+.navigate-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 2rpx;
+}

@@ -1,0 +1,84 @@
+<view class="container">
+  <map id="myMap" class="main-map" latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="onMarkerTap" bindtap="onMapTap" enable-poi="{{false}}" show-location></map>
+
+  <view class="backdrop-layer {{viewMode === 'detail' ? 'active' : ''}}" bindtap="onDetailClose"></view>
+
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-back" bindtap="onBackTap"><text class="back-icon">〈</text></view>
+  </view>
+
+  <view wx:if="{{viewMode === 'mini'}}" class="mini-button" bindtap="onMiniButtonTap">
+    <view class="poker-deck-icon">
+      <view class="deck-card-mini deck-1"></view>
+      <view class="deck-card-mini deck-2"></view>
+      <view class="deck-card-mini deck-3"></view>
+    </view>
+    <text class="mini-text">{{attractions[activeCardIndex].distance}}</text>
+  </view>
+
+  <view wx:if="{{viewMode === 'browse'}}" class="browse-container">
+    <view class="deck-area">
+      <view wx:for="{{attractions}}" wx:key="id" class="deck-card {{index === activeCardIndex ? 'active' : ''}}" style="transform: {{cardStyles[index].transform}}; opacity: {{cardStyles[index].opacity}}; z-index: {{cardStyles[index].zIndex}};" bindtap="onCardTap" bindtouchstart="onCardTouchStart" bindtouchmove="onCardTouchMove" bindtouchend="onCardTouchEnd" data-index="{{index}}">
+        <view class="card-image-section">
+          <image class="card-image" src="/image/attractions/{{item.id === 1 ? 'xishiku': item.id === 2 ? 'gugong' : item.id === 3 ? 'shejitan' : 'baiyunguan'}}.png" mode="aspectFill"></image>
+        </view>
+        <view class="card-text-section">
+          <view class="card-top">
+            <view class="card-header">
+              <text class="card-title">{{item.name}}</text>
+              <text class="card-play-icon">▶</text>
+            </view>
+            <text class="card-distance">{{item.distance}} AWAY</text>
+          </view>
+          <view wx:if="{{index === activeCardIndex}}" class="card-explore">
+            <text class="explore-text">Explore now</text>
+            <text class="explore-arrow">→</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{viewMode === 'detail'}}" class="detail-sheet">
+    <view class="detail-handle"></view>
+    <view class="detail-nav">
+      <view class="detail-close" bindtap="onDetailClose"><text class="close-icon">〈</text></view>
+      <view class="detail-actions">
+        <view class="action-btn"><text>↗</text></view>
+        <view class="action-btn"><text>♡</text></view>
+      </view>
+    </view>
+    <scroll-view class="detail-scroll" scroll-y>
+      <view class="detail-hero">
+        <image class="hero-image" src="/image/attractions/{{selectedAttraction.id === 1 ? 'xishiku' : selectedAttraction.id === 2 ? 'gugong' : selectedAttraction.id === 3 ? 'shejitan' : 'baiyunguan'}}.png" mode="aspectFill"></image>
+        <view class="hero-overlay">
+          <text class="hero-title">{{selectedAttraction.name}}</text>
+          <text class="hero-subtitle">{{selectedAttraction.distance}} away from your location</text>
+        </view>
+      </view>
+      <view class="audio-player">
+        <view class="audio-left">
+          <view class="audio-play-btn"><text class="play-icon-large">▶</text></view>
+          <view class="audio-info">
+            <text class="audio-title">Audio Guide</text>
+            <text class="audio-subtitle">Historical Narrative (3:24)</text>
+          </view>
+        </view>
+        <view class="audio-waveform">
+          <view class="wave-bar" wx:for="{{[4,12,6,16,8,14,4,18,10,12,6,16,8,12,4,10,14,8,12,6]}}" wx:key="index" style="height: {{item}}rpx;"></view>
+        </view>
+      </view>
+      <view class="detail-content">
+        <view class="content-section">
+          <view class="section-indicator"></view>
+          <text class="section-text">{{selectedAttraction.desc}}</text>
+        </view>
+        <view class="content-body">
+          <text class="body-text">建于明清两代，历经多次修缮。作为中国古代宫廷建筑的精华，它展现了中国传统建筑的最高成就。</text>
+          <view class="quote-block"><text class="quote-text">"建筑遵循阴阳原理，中轴线代表着宇宙的秩序。"</text></view>
+          <text class="body-text">宫殿采用木结构框架，红墙黄瓦，金碧辉煌，体现了皇家气派和中国传统美学。</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

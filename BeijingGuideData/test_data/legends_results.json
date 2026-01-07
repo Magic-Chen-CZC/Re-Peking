@@ -1,0 +1,92 @@
+[
+  {
+    "id": "pdf_legend_001_page_5",
+    "text_content": "明清时的北京城，皇宫位于全城中心，是朝廷重地……明十三陵坐落在北京西北昌平区内的天寿山南麓，为什么明十三陵会坐落于此呢？",
+    "source_type": "pdf_legend",
+    "summary": "本文讲述了北京城中轴线的历史演变及其在城市规划中的核心地位。从中轴线在金代初现、元代确立到明代东移定型，展现了古代都城规划对风水理念和皇权象征的重视。同时提及明十三陵选址天寿山及故宫人造景山与金水河的营建，体现了中国古代城市布局的文化内涵。",
+    "metadata": {
+      "location_mentioned": "北京中轴线, 天寿山, 故宫, 景山",
+      "page_number": 5,
+      "pdf_file": "legends",
+      "chunk_index": 1,
+      "chunk_total": 6
+    },
+    "story_name": "北京城中轴线的形成与风水布局",
+    "is_legend": false
+  },
+  {
+    "id": "pdf_legend_013_page_12",
+    "text_content": "相传明成祖朱棣迁都北京后，为选陵墓之地遍览风水。初拒屠家营，因‘朱’与‘猪’同音，恐入屠宰场；再弃潭柘寺，因地形狭隘；又舍羊山，因邻‘狼儿峪’恐遭狼害；复否燕家台，因‘燕家’谐音‘晏驾’。终定昌平黄土山，见前有康家坟（糠），左有橡子林，右有干河（泄水），以为吉兆，遂建陵于此，并因逢五十大寿，改山名为天寿山。",
+    "source_type": "pdf_legend",
+    "summary": "明成祖朱棣为选陵址遍寻北京多地，因风水谐音和地形考量屡次否决，最终选定昌平黄土山并改名天寿山。",
+    "metadata": {
+      "location_mentioned": "北京昌平天寿山, 屠家营, 潭柘寺, 羊山, 狼儿峪, 燕家台, 黄土山",
+      "page_number": 12,
+      "pdf_file": "legends",
+      "chunk_index": 2,
+      "chunk_total": 6
+    },
+    "story_name": "明十三陵选址传说",
+    "is_legend": true
+  },
+  {
+    "id": "pdf_legend_002_page_13",
+    "text_content": "紫禁城得名源于中国古代天文学说，紫微星为天帝居所称‘紫宫’，皇帝自称天子，故将皇宫比作紫宫；又因戒备森严为禁地，合称‘紫禁城’。明成祖朱棣认为黄土山前有康、左有橡、右有干水，是朱家风水宝地，且恰逢其五十寿辰，遂改名为天寿山。",
+    "source_type": "pdf_legend",
+    "summary": "解释紫禁城名称的天文渊源及其‘天人合一’的文化内涵，并讲述明成祖朱棣因风水与寿辰将黄土山改名为天寿山的故事。",
+    "metadata": {
+      "location_mentioned": "北京城中心, 紫禁城, 天寿山",
+      "page_number": 13,
+      "pdf_file": "legends",
+      "chunk_index": 3,
+      "chunk_total": 6
+    },
+    "story_name": "紫禁城名称由来与天寿山命名",
+    "is_legend": true
+  },
+  {
+    "id": "pdf_legend_002_page_15",
+    "text_content": "袁世凯称帝后因腿短更换太和殿龙椅，原龙椅被遗弃。1959年故宫专家据光绪年间照片在旧家具房寻回真品，经三年修复后重新安置。现太和殿龙椅为修复后的真品，通体鎏金雕龙，象征皇权，富丽威严。太和殿历经多次焚毁重建，现为康熙年间所修，是明清举行登基、大婚、朝贺等大典的最高规格宫殿。",
+    "source_type": "pdf_legend",
+    "summary": "袁世凯称帝时因腿短更换龙椅，原龙椅被遗弃。1959年故宫专家根据老照片在旧家具堆中寻回真品，经三年修复后重新安置于太和殿，恢复历史原貌。",
+    "metadata": {
+      "location_mentioned": "北京故宫太和殿",
+      "page_number": 15,
+      "pdf_file": "legends",
+      "chunk_index": 4,
+      "chunk_total": 6
+    },
+    "story_name": "太和殿龙椅的失落与重修",
+    "is_legend": false
+  },
+  {
+    "id": "pdf_legend_002_page_16",
+    "text_content": "相传在建造故宫三大殿时，缅甸进贡巨木被锯短，蒯祥巧妙设计两端雕龙镶珠、可装卸的‘金刚腿’门槛，深得皇帝赞赏。他技艺高超，被称为‘蒯鲁班’，晚年仍热心授艺。另有说法认为蔡信才是紫禁城真正设计者，因他在蒯祥到京前已主持规划。",
+    "source_type": "pdf_legend",
+    "summary": "讲述明代工匠蒯祥在建造紫禁城过程中的巧思妙想，特别是‘金刚腿’门槛的发明，以及他被誉为‘蒯鲁班’的故事。同时提及蔡信可能为实际设计者的争议。",
+    "metadata": {
+      "location_mentioned": "紫禁城, 北京, 蒯侍郎胡同",
+      "page_number": 16,
+      "pdf_file": "legends",
+      "chunk_index": 5,
+      "chunk_total": 6
+    },
+    "story_name": "蒯祥与紫禁城建造",
+    "is_legend": false
+  },
+  {
+    "id": "pdf_legend_002_page_17",
+    "text_content": "据说，朱棣最初将建造宫殿的任务派给了工部尚书宋礼。建造宫殿首先得有设计图纸，于是宋礼找到了蔡信，让他设计宫殿布局。蔡信很有才华，很快就完成了设计。宋礼一看图纸，连连称赞。各个宫殿，依中轴线，左祖右社，十分规整，稳稳当当，象征着大明江山长治久安。宋礼还亲自考察了一番，更加确定这个设计非常完美，而且施工不难，于是上呈朱棣。朱棣也不懂设计，只是一听皇宫有九重宫阙、九千九百九十九间半房屋，顿时心",
+    "source_type": "pdf_legend",
+    "summary": "明成祖朱棣命工部尚书宋礼负责建造宫殿，宋礼委托蔡信设计紫禁城布局。蔡信依中轴线规划左祖右社，结构规整，象征大明江山稳固，设计方案获朱棣认可。",
+    "metadata": {
+      "page_number": 17,
+      "pdf_file": "legends",
+      "location_mentioned": "紫禁城",
+      "chunk_index": 6,
+      "chunk_total": 6
+    },
+    "story_name": "紫禁城设计典故",
+    "is_legend": false
+  }
+]

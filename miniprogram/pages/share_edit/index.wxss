@@ -1,0 +1,376 @@
+/* 容器 */
+.share-edit-container {
+  width: 100%;
+  height: 100vh;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 导航栏 */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 32rpx;
+  background: #ffffff;
+  border-bottom: 1rpx solid #e0e0e0;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.navbar-back {
+  font-size: 40rpx;
+  color: #333;
+  padding: 8rpx;
+}
+
+.navbar-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.navbar-placeholder {
+  width: 56rpx;
+}
+
+/* 加载状态 */
+.loading-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24rpx;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #e0e0e0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 内容滚动区 */
+.content-scroll {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+/* 区块 */
+.section {
+  background: #ffffff;
+  margin-bottom: 24rpx;
+  padding: 32rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.required {
+  color: #ef4444;
+  margin-left: 4rpx;
+}
+
+/* 旅程快照 */
+.trip-info {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.trip-status {
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 8rpx;
+}
+
+.trip-stops-count {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* Stops 列表 */
+.stops-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.stop-item {
+  padding: 24rpx;
+  background: #f9fafb;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #3b82f6;
+}
+
+.stop-header {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.stop-seq {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48rpx;
+  height: 48rpx;
+  background: #3b82f6;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.stop-name {
+  flex: 1;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.stop-status {
+  font-size: 22rpx;
+  padding: 6rpx 12rpx;
+  background: #d1fae5;
+  color: #065f46;
+  border-radius: 6rpx;
+}
+
+/* 用户记录 */
+.stop-logs {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-bottom: 12rpx;
+  padding: 16rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+}
+
+.logs-label {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+
+.log-item {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* AI 摘要 */
+.stop-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  padding: 16rpx;
+  background: #fef3c7;
+  border-radius: 8rpx;
+}
+
+.summary-label {
+  font-size: 24rpx;
+  color: #92400e;
+}
+
+.summary-text {
+  font-size: 26rpx;
+  color: #78350f;
+  line-height: 1.5;
+}
+
+/* 表单区块 */
+.form-section {
+  /* 继承 .section 样式 */
+}
+
+/* 输入框 */
+.input-field {
+  width: 100%;
+  padding: 24rpx;
+  font-size: 28rpx;
+  background: #f9fafb;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 12rpx;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  border-color: #3b82f6;
+  background: #ffffff;
+}
+
+/* 文本域 */
+.textarea-field {
+  width: 100%;
+  min-height: 200rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+  background: #f9fafb;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 12rpx;
+  box-sizing: border-box;
+}
+
+.textarea-field:focus {
+  border-color: #3b82f6;
+  background: #ffffff;
+}
+
+/* 字符计数 */
+.char-count {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+}
+
+/* 封面选择器 */
+.cover-picker {
+  position: relative;
+  width: 100%;
+  height: 400rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background: #f9fafb;
+  border: 2rpx dashed #d1d5db;
+}
+
+.cover-preview {
+  width: 100%;
+  height: 100%;
+}
+
+.cover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  font-size: 28rpx;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.cover-picker:active .cover-overlay {
+  opacity: 1;
+}
+
+.cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+}
+
+.placeholder-icon {
+  font-size: 80rpx;
+}
+
+.placeholder-text {
+  font-size: 28rpx;
+  color: #9ca3af;
+}
+
+.cover-hint {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 底部间距 */
+.bottom-spacer {
+  height: 160rpx;
+}
+
+/* 底部按钮 */
+.bottom-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 24rpx;
+  padding: 24rpx 32rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background: #ffffff;
+  border-top: 1rpx solid #e0e0e0;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+.btn-cancel {
+  flex: 1;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #666;
+  background: #f3f4f6;
+  border-radius: 12rpx;
+  transition: all 0.3s;
+}
+
+.btn-cancel:active {
+  background: #e5e7eb;
+}
+
+.btn-publish {
+  flex: 2;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-radius: 12rpx;
+  box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.3);
+  transition: all 0.3s;
+}
+
+.btn-publish:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(59, 130, 246, 0.3);
+}
+
+.btn-publish.disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  box-shadow: none;
+}

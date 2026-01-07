@@ -1,0 +1,178 @@
+<view class="plan-container">
+  <!-- Paper Texture Overlay -->
+  <view class="paper-texture"></view>
+
+  <!-- Header -->
+  <view class="header-section" bindlongpress="handleHeaderLongPress">
+    <view class="header-meta">
+      <text class="tag-draft">DRAFT</text>
+      <text class="tag-trip">#TRIP-2024-AUG</text>
+      <text class="tag-mode" wx:if="{{devMode}}">🛠️ DEV</text>
+    </view>
+    <view class="header-title">Travel Log</view>
+    <view class="header-desc">A curated collection of your journey through the Imperial Palace axis.</view>
+  </view>
+
+  <view class="content-area">
+    <!-- COMPLETED HEADER -->
+    <view class="section-header">
+      <view class="vertical-line"></view>
+      <text class="section-title">Completed</text>
+      <text class="section-count">{{visitedList.length}} ITEMS</text>
+    </view>
+
+    <!-- Visited Items -->
+    <view class="list-container">
+      <block wx:for="{{visitedList}}" wx:key="id">
+        <ticket-stub 
+          attraction="{{item}}" 
+          status="visited" 
+          index="{{index}}"
+          bind:addLog="handleAddLog"
+        ></ticket-stub>
+      </block>
+    </view>
+
+    <!-- UPCOMING HEADER -->
+    <view class="section-header upcoming">
+      <view class="vertical-line"></view>
+      <view class="header-left">
+        <text class="section-title">Upcoming</text>
+        <text class="section-count">{{plannedList.length}} ITEMS</text>
+      </view>
+      
+      <!-- Controls -->
+      <view class="header-controls">
+        <view class="control-btn {{isOptimizing ? 'optimizing' : ''}}" bindtap="handleAutoOptimize">
+          <text>✨</text>
+        </view>
+        <view class="divider"></view>
+        <view class="control-btn {{isReordering ? 'active' : ''}}" bindtap="toggleReordering">
+          <text>☰</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Planned Items -->
+    <view class="list-container">
+      <block wx:for="{{plannedList}}" wx:key="id">
+        <ticket-stub 
+          attraction="{{item}}" 
+          status="planned" 
+          index="{{index + visitedList.length}}"
+          isReordering="{{isReordering}}"
+          isFirst="{{index === 0}}"
+          isLast="{{index === plannedList.length - 1}}"
+          bind:delete="handleDeletePlanned"
+          bind:moveUp="handleMoveUp"
+          bind:moveDown="handleMoveDown"
+        ></ticket-stub>
+        <!-- 开发者模式下才显示 ARRIVE / DONE 按钮 -->
+        <view class="status-actions" wx:if="{{devMode && !isReordering}}">
+          <button 
+            class="status-btn arrive" 
+            bindtap="arriveStop" 
+            data-stop-id="{{item._stopId}}" 
+            wx:if="{{item._status === 'UPCOMING'}}">
+            ARRIVE
+          </button>
+          <button 
+            class="status-btn complete" 
+            bindtap="completeStop" 
+            data-stop-id="{{item._stopId}}">
+            DONE
+          </button>
+        </view>
+      </block>
+    </view>
+
+    <!-- Add Button -->
+    <view class="add-button-container">
+      <view class="add-button" bindtap="showRecommendationsModal">
+        <view class="plus-icon">+</view>
+        <text>ADD WAYPOINT</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Footer Signature -->
+  <view class="footer-signature">
+    <text class="brand">ZenGuide</text>
+    <text class="date">GENERATED ON 2024.08.20</text>
+  </view>
+
+  <!-- Floating Share Button -->
+  <view class="floating-share">
+    <view class="share-btn" bindtap="shareToCommunity">
+      <text class="share-icon">⎋</text>
+      <text>SHARE MANIFEST</text>
+    </view>
+  </view>
+
+  <!-- 开发者模式控制面板 -->
+  <view wx:if="{{devMode}}" class="dev-controls">
+    <button class="dev-btn" bindtap="toggleTestMode">
+      {{testMode ? '✅ 测试模式（命中=1）' : '⚙️ 正常模式（命中=2）'}}
+    </button>
+    <button class="dev-btn inject" bindtap="showLocationInjector">
+      📍 注入定位
+    </button>
+  </view>
+
+  <!-- 定位注入弹窗 -->
+  <view wx:if="{{showLocationInjector}}" class="modal-overlay" bindtap="hideLocationInjector">
+    <view class="modal-content location-injector" catchtap="noop">
+      <view class="modal-header">
+        <text class="modal-title">定位注入</text>
+        <view class="close-btn" bindtap="hideLocationInjector">×</view>
+      </view>
+      <view class="modal-body">
+        <view class="input-row">
+          <text class="input-label">纬度 (Latitude):</text>
+          <input 
+            class="coord-input" 
+            type="digit" 
+            value="{{testLat}}" 
+            bindinput="onTestLatInput" 
+            placeholder="39.9175"
+          />
+        </view>
+        <view class="input-row">
+          <text class="input-label">经度 (Longitude):</text>
+          <input 
+            class="coord-input" 
+            type="digit" 
+            value="{{testLon}}" 
+            bindinput="onTestLonInput" 
+            placeholder="116.3972"
+          />
+        </view>
+        <button class="inject-btn" bindtap="injectLocation">注入并触发围栏判定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- Recommendation Modal -->
+  <view wx:if="{{showRecommendations}}" class="modal-overlay" bindtap="hideRecommendationsModal">
+    <view class="modal-content" catchtap="noop">
+      <view class="modal-header">
+        <text class="modal-title">Recommended</text>
+        <view class="close-btn" bindtap="hideRecommendationsModal">×</view>
+      </view>
+      <scroll-view scroll-y class="modal-body">
+        <block wx:for="{{recommendations}}" wx:key="id">
+          <view class="rec-item" bindtap="handleAddAttraction" data-item="{{item}}">
+            <view class="rec-left">
+              <view class="rec-icon">📍</view>
+              <view class="rec-info">
+                <text class="rec-name">{{item.name}}</text>
+                <text class="rec-meta">{{item.type}} • {{item.distance}}</text>
+              </view>
+            </view>
+            <view class="rec-add">+</view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,113 @@
+<view class="share-edit-container">
+  <!-- 导航栏 -->
+  <view class="navbar">
+    <view class="navbar-back" bindtap="cancel">
+      <text>←</text>
+    </view>
+    <view class="navbar-title">分享到社区</view>
+    <view class="navbar-placeholder"></view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{isLoading}}" class="loading-container">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view wx:else scroll-y class="content-scroll">
+    <!-- 旅程快照 -->
+    <view class="section trip-snapshot">
+      <view class="section-title">📍 旅程快照</view>
+      <view class="trip-info">
+        <text class="trip-status">{{tripDetail.status || 'PLANNING'}}</text>
+        <text class="trip-stops-count">{{tripDetail.stops.length}} 站</text>
+      </view>
+      
+      <!-- Stops 列表 -->
+      <view class="stops-list">
+        <block wx:for="{{tripDetail.stops}}" wx:key="seq">
+          <view class="stop-item">
+            <view class="stop-header">
+              <text class="stop-seq">{{item.seq}}</text>
+              <text class="stop-name">{{item.name}}</text>
+              <text class="stop-status">{{item.status || 'UPCOMING'}}</text>
+            </view>
+            
+            <!-- 用户记录 -->
+            <view wx:if="{{item.user_logs && item.user_logs.length > 0}}" class="stop-logs">
+              <text class="logs-label">💭 我的记录：</text>
+              <block wx:for="{{item.user_logs}}" wx:key="index" wx:for-item="log">
+                <text class="log-item">· {{log}}</text>
+              </block>
+            </view>
+            
+            <!-- AI 摘要 -->
+            <view wx:if="{{item.ai_summary}}" class="stop-summary">
+              <text class="summary-label">🤖 AI 摘要：</text>
+              <text class="summary-text">{{item.ai_summary}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 分享标题 -->
+    <view class="section form-section">
+      <view class="section-title">✏️ 标题 <text class="required">*</text></view>
+      <input 
+        class="input-field" 
+        placeholder="给你的旅程起个标题..." 
+        value="{{title}}"
+        bindinput="onTitleInput"
+        maxlength="100"
+      />
+      <text class="char-count">{{title.length}}/100</text>
+    </view>
+
+    <!-- 感想/反思 -->
+    <view class="section form-section">
+      <view class="section-title">💭 感想（可选）</view>
+      <textarea 
+        class="textarea-field" 
+        placeholder="分享你的旅行感受、收获、建议..."
+        value="{{reflection}}"
+        bindinput="onReflectionInput"
+        maxlength="500"
+        auto-height
+      />
+      <text class="char-count">{{reflection.length}}/500</text>
+    </view>
+
+    <!-- 封面图片 -->
+    <view class="section form-section">
+      <view class="section-title">🖼️ 封面图片（可选）</view>
+      <view class="cover-picker" bindtap="chooseImage">
+        <block wx:if="{{coverLocalPath}}">
+          <image src="{{coverLocalPath}}" mode="aspectFill" class="cover-preview"></image>
+          <view class="cover-overlay">
+            <text>点击重新选择</text>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="cover-placeholder">
+            <text class="placeholder-icon">📷</text>
+            <text class="placeholder-text">点击选择图片</text>
+          </view>
+        </block>
+      </view>
+      <text class="cover-hint">未选择图片时，将使用第一站的默认图片</text>
+    </view>
+
+    <!-- 底部间距 -->
+    <view class="bottom-spacer"></view>
+  </scroll-view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-actions">
+    <view class="btn-cancel" bindtap="cancel">取消</view>
+    <view class="btn-publish {{isPublishing ? 'disabled' : ''}}" bindtap="publish">
+      {{isPublishing ? '发布中...' : '发布到社区'}}
+    </view>
+  </view>
+</view>

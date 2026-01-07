@@ -1,0 +1,34 @@
+<view class="graphic-container {{bgClass}}">
+  <!-- Grid Pattern Background -->
+  <view class="pattern-bg {{type === 'visited' ? 'opacity-20' : 'opacity-10'}}"></view>
+
+  <!-- Shapes -->
+  <view class="shape-container">
+    <block wx:if="{{shape === 'circle'}}">
+      <view class="shape-circle {{fgColor}}"></view>
+      <view class="shape-circle-dashed {{fgColor}}"></view>
+    </block>
+    <block wx:if="{{shape === 'triangle'}}">
+      <view class="shape-triangle {{fgColor}}"></view>
+      <view class="shape-line {{fgColor}}"></view>
+    </block>
+    <block wx:if="{{shape === 'grid'}}">
+      <view class="shape-rect {{fgColor}}"></view>
+      <view class="shape-cross-h {{fgColor}}"></view>
+      <view class="shape-cross-v {{fgColor}}"></view>
+    </block>
+    <block wx:if="{{shape === 'arch'}}">
+      <view class="shape-arch {{fgColor}}"></view>
+      <view class="shape-arch-dashed {{fgColor}}"></view>
+    </block>
+  </view>
+
+  <!-- Number -->
+  <view class="number {{numColor}}">0{{index + 1}}</view>
+
+  <!-- Meta Info -->
+  <view class="meta-info">
+    <text class="meta-label {{type === 'visited' ? 'text-white-40' : 'text-gray-400'}}">FIG.</text>
+    <text class="meta-value {{type === 'visited' ? 'text-white-60' : 'text-gray-500'}}">{{index + 1}}.0</text>
+  </view>
+</view>

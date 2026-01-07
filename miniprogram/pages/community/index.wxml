@@ -1,0 +1,262 @@
+<view class="community-container">
+  <!-- Tabletop Texture -->
+  <view class="tabletop-texture"></view>
+
+  <!-- Header -->
+  <view class="header">
+    <view class="header-title">Travel Log</view>
+    <view class="header-subtitle">TABLETOP MODE • {{posts.length}} ITEMS</view>
+  </view>
+
+  <!-- Loading Indicator -->
+  <view class="loading-indicator {{isRefreshing ? 'active' : ''}}">
+    <view class="spinner"></view>
+  </view>
+
+  <!-- Scrollable Table -->
+  <scroll-view 
+    scroll-y 
+    class="table-scroll" 
+    enable-back-to-top
+    refresher-enabled="true"
+    refresher-triggered="{{isRefreshing}}"
+    bindrefresherrefresh="onPullDownRefresh"
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+    scrollbar-hidden="{{true}}"
+  >
+    <view class="posts-wrapper">
+      <block wx:for="{{posts}}" wx:key="id">
+        <scattered-ticket 
+          post="{{item}}" 
+          index="{{index}}" 
+          layoutConfig="{{layoutConfigs[index]}}"
+          isFocused="{{focusedIndex === index}}"
+          bind:click="handlePostClick"
+          bind:longpress="handlePostLongPress"
+        ></scattered-ticket>
+      </block>
+      
+      <!-- Bottom Spacer -->
+      <view class="bottom-spacer">
+        <view class="spacer-line"></view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- Floating Publish Button -->
+  <view class="fab-btn" bindtap="openPublishModal">
+    <view class="fab-icon">+</view>
+  </view>
+
+  <!-- Publish Modal -->
+  <view wx:if="{{showPublishModal}}" class="modal-overlay" bindtap="closePublishModal">
+    <view class="modal-content publish-modal" catchtap="noop">
+      <view class="modal-handle"></view>
+      <view class="modal-header">
+        <view class="close-btn" bindtap="closePublishModal">×</view>
+        <view class="modal-title">分享到社区</view>
+        <view class="publish-btn" bindtap="handleSubmitPost">发布</view>
+      </view>
+      
+      <scroll-view 
+        scroll-y 
+        class="modal-body"
+        enhanced="{{true}}"
+        show-scrollbar="{{false}}"
+        scrollbar-hidden="{{true}}"
+      >
+        <!-- 地点信息（下拉选择历史行程） -->
+        <view class="form-section">
+          <view class="section-label">
+            <text class="label-icon">📍</text>
+            <text class="label-text">地点信息</text>
+            <text class="required-mark">*</text>
+          </view>
+          <view wx:if="{{newPost.lockTripSelection}}" class="picker-locked">
+            <text>{{newPost.tripLabel || '本次行程'}}</text>
+          </view>
+          <picker 
+            wx:else
+            mode="selector" 
+            range="{{tripHistoryLabels}}" 
+            value="{{selectedTripIndex}}"
+            bindchange="handleTripPickerChange"
+          >
+            <view class="picker-field">
+              <text>{{tripHistoryLabels[selectedTripIndex] || '请选择历史行程'}}</text>
+            </view>
+          </picker>
+          <text class="picker-hint">仅展示你过往的行程记录</text>
+        </view>
+
+        <!-- 图片上传（可选） -->
+        <view class="form-section" bindtap="handleImageUpload">
+          <view class="section-label">
+            <text class="label-icon">📷</text>
+            <text class="label-text">封面图片（可选）</text>
+          </view>
+          <block wx:if="{{newPost.imageUrl}}">
+            <image src="{{newPost.imageUrl}}" mode="aspectFill" class="uploaded-image"></image>
+          </block>
+          <block wx:else>
+            <view class="upload-placeholder">
+              <view class="upload-icon">📷</view>
+              <text>点击上传图片</text>
+            </view>
+          </block>
+        </view>
+
+        <!-- 标题输入 -->
+        <view class="form-section">
+          <view class="section-label">
+            <text class="label-icon">📝</text>
+            <text class="label-text">标题</text>
+            <text class="required-mark">*</text>
+          </view>
+          <input 
+            class="input-title" 
+            placeholder="给你的旅程起个标题..." 
+            placeholder-class="placeholder" 
+            bindinput="handleTitleInput" 
+            value="{{newPost.title}}" 
+          />
+        </view>
+
+        <!-- 感想输入 -->
+        <view class="form-section">
+          <view class="section-label">
+            <text class="label-icon">💭</text>
+            <text class="label-text">旅行感想</text>
+            <text class="required-mark">*</text>
+          </view>
+          <textarea 
+            class="input-content" 
+            placeholder="分享你的旅行感受和心得..." 
+            placeholder-class="placeholder" 
+            bindinput="handleContentInput" 
+            value="{{newPost.content}}" 
+            maxlength="-1" 
+            auto-height
+          ></textarea>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+
+
+  <!-- Detail Modal -->
+  <view wx:if="{{selectedPost}}" class="modal-overlay" bindtap="closeModal">
+    <view class="modal-content detail-modal" catchtap="noop">
+      <view class="modal-handle"></view>
+      
+      <!-- Sticky Header -->
+      <view class="modal-header">
+        <view class="header-btn" bindtap="closeModal">返回</view>
+        <view class="header-title">文章详情</view>
+        <view class="header-spacer"></view>
+      </view>
+
+      <scroll-view 
+        scroll-y 
+        class="modal-body detail-body"
+        enhanced="{{true}}"
+        show-scrollbar="{{false}}"
+        scrollbar-hidden="{{true}}"
+      >
+        <!-- 主图 -->
+        <view class="detail-hero">
+          <image src="{{selectedPost.imageUrl}}" mode="aspectFill" class="detail-hero-image"></image>
+          <view class="detail-hero-tag">
+            <text class="hero-tag-text">主图</text>
+          </view>
+        </view>
+
+        <!-- 标题 -->
+        <view class="detail-title">{{selectedPost.title}}</view>
+
+        <!-- 简介 -->
+        <view class="detail-intro">{{selectedPost.reflection}}</view>
+
+        <!-- 地点信息 -->
+        <view class="detail-section">
+          <view class="detail-section-header">
+            <text class="detail-section-title">地点信息</text>
+            <text class="detail-section-subtitle">{{detailStopsTotal}} 个地点</text>
+          </view>
+
+          <!-- 地点详情 -->
+          <view class="detail-stops-block">
+            <view class="detail-section-line">
+              <text class="detail-section-label">景点列表</text>
+              <view class="detail-section-action" bindtap="toggleStopsExpanded">
+                {{detailStopsExpanded ? '收起' : '展开'}}
+              </view>
+            </view>
+            <view class="detail-stop-cards">
+              <block wx:for="{{detailStopsDisplay}}" wx:key="seq">
+                <view class="detail-stop-card">
+                  <view class="detail-stop-header">
+                    <text class="detail-stop-name">{{item.name}}</text>
+                    <text class="detail-stop-seq">第{{item.seq}}站</text>
+                  </view>
+                  <view wx:if="{{item.aiSummary}}" class="detail-stop-ai">
+                    <text class="detail-stop-label">AI 总结</text>
+                    <text class="detail-stop-text">{{item.aiSummary}}</text>
+                  </view>
+                  <view class="detail-stop-memories">
+                    <text class="detail-stop-label">记忆点</text>
+                    <view wx:if="{{item.userLogs && item.userLogs.length > 0}}" class="detail-stop-logs">
+                      <block wx:for="{{item.userLogs}}" wx:key="*this">
+                        <text class="detail-log-item">• {{item}}</text>
+                      </block>
+                    </view>
+                    <text wx:else class="detail-stop-empty">暂无记录</text>
+                  </view>
+                </view>
+              </block>
+            </view>
+            <view wx:if="{{detailStopsTotal > detailStopsDisplay.length}}" class="detail-section-more" bindtap="toggleStopsExpanded">
+              <text>{{detailStopsExpanded ? '收起地点详情' : '展开全部地点'}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 评论区 -->
+        <view class="detail-section detail-comments-section">
+          <view class="detail-section-header">
+            <view class="detail-section-heading">
+              <text class="detail-section-title">评论区</text>
+              <text class="detail-section-subtitle">{{selectedPost.commentCount || 0}} 条</text>
+            </view>
+            <view class="detail-comments-actions">
+              <view class="detail-like-btn {{selectedPost.liked ? 'liked' : ''}}" bindtap="toggleLike">
+                <text>♥</text>
+                <text class="detail-like-count">{{selectedPost.likeCount || 0}}</text>
+              </view>
+              <view class="detail-section-action" bindtap="toggleCommentInput">写评论</view>
+            </view>
+          </view>
+          <block wx:if="{{selectedPost.comments && selectedPost.comments.length > 0}}">
+            <view class="detail-comments-list">
+              <block wx:for="{{selectedPost.comments}}" wx:key="id">
+                <view class="detail-comment-item">
+                  <text class="detail-comment-user">{{item.user}}</text>
+                  <text class="detail-comment-text">{{item.text}}</text>
+                </view>
+              </block>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="detail-empty-comments">暂无评论，成为第一个留言的人吧。</view>
+          </block>
+          <view wx:if="{{detailShowCommentInput}}" class="detail-comment-input-area">
+            <input class="detail-comment-input" placeholder="写下你的旅行感想…" bindinput="handleDetailCommentInput" value="{{detailCommentText}}" />
+            <view class="detail-comment-send" bindtap="submitDetailComment">发送</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

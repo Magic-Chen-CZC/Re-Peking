@@ -1,0 +1,96 @@
+<view class="ticket-container">
+  <!-- Timeline Node -->
+  <view class="timeline-node {{status === 'visited' ? 'visited' : 'planned'}}"></view>
+  
+  <!-- Vertical Connecting Line -->
+  <view class="timeline-line"></view>
+
+  <!-- Ticket Card -->
+  <view class="ticket-card {{status === 'visited' ? 'bg-white border-gray-200' : 'bg-white border-dashed border-gray-300'}}" bindtap="handleCardClick">
+    <view class="card-main">
+      <!-- LEFT SECTION: Swiss Graphic -->
+      <view class="card-left">
+        <swiss-graphic index="{{index}}" type="{{status}}"></swiss-graphic>
+        <view wx:if="{{status === 'visited'}}" class="stamp-ok">
+          <view class="stamp-inner">OK</view>
+        </view>
+      </view>
+
+      <!-- RIGHT SECTION: Header Info -->
+      <view class="card-right">
+        <view class="card-header">
+          <view class="header-top">
+            <text class="meta-type">{{attraction.type}} • {{attraction.distance}}</text>
+            
+            <view wx:if="{{status === 'visited'}}" class="expand-icon {{isExpanded ? 'rotated' : ''}}">▼</view>
+            
+            <view wx:if="{{status === 'planned'}}" class="controls">
+              <block wx:if="{{isReordering}}">
+                <view class="reorder-btns">
+                  <view class="btn-icon {{isFirst ? 'disabled' : ''}}" catchtap="onMoveUp">↑</view>
+                  <view class="btn-icon {{isLast ? 'disabled' : ''}}" catchtap="onMoveDown">↓</view>
+                </view>
+              </block>
+              <block wx:else>
+                <view class="btn-icon delete" catchtap="onDelete">×</view>
+              </block>
+            </view>
+          </view>
+          
+          <text class="attraction-name {{status === 'visited' ? 'text-black' : 'text-gray-500'}}">{{attraction.name}}</text>
+        </view>
+
+        <view class="card-footer">
+          <view wx:if="{{status === 'visited'}}" class="status-badge visited">
+            <view class="dot green"></view>
+            <text>VERIFIED</text>
+          </view>
+          <view wx:else class="status-badge planned">
+            <view class="dot blue pulse"></view>
+            <text>PLANNED</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- EXPANDABLE SECTION: Markdown Content (Only for Visited) -->
+    <view wx:if="{{isExpanded && status === 'visited'}}" class="expanded-content">
+      <view class="content-inner">
+        <!-- User Experience Log -->
+        <view class="log-section">
+          <view class="section-title">Experience Log</view>
+          <view class="log-list">
+            <block wx:for="{{attraction.userLogs}}" wx:key="*this">
+              <view class="log-item">
+                <view class="check-icon">✓</view>
+                <text class="log-text">"{{item}}"</text>
+              </view>
+            </block>
+          </view>
+
+          <!-- Add Log Input -->
+          <view class="add-log-container">
+            <block wx:if="{{!isAddingLog}}">
+              <view class="add-btn" catchtap="startAddLog">+ Add Note</view>
+            </block>
+            <block wx:else>
+              <view class="input-group" catchtap="noop">
+                <input class="log-input" value="{{newLogText}}" bindinput="onInputLog" bindconfirm="submitLog" bindblur="cancelAddLog" placeholder="Write your memory..." focus="{{true}}" />
+                <view class="save-btn" catchtap="submitLog">SAVE</view>
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <!-- AI Summary -->
+        <view class="ai-summary">
+          <view class="ai-icon">✎</view>
+          <view class="ai-title">
+            <view class="dot amber pulse"></view> AI Insight
+          </view>
+          <text class="ai-text">{{attraction.aiSummary}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

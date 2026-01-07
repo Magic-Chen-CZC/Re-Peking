@@ -1,0 +1,470 @@
+const { API_BASE_URL } = req    {
+        id: 'sample-003',
+        trip_id: null,
+        userName: 'David Historian',
+        userAvatar: '📚',
+        title: '颐和园半日游 · 3 stops',
+        reflection: '颐和园的湖光山色美不胜收，长廊的彩绘值得细细品味。建议预留至少 3 小时游览。',
+        cover_poi_id: 'yiheyuan',
+        cover_image_url: null,
+        created_at: '2024-01-03T10:00:00+00:00',
+        archetype: 'SJ'
+    }utils/config.js');
+
+// 🔥 样例数据（兜底使用，至少 3 条）
+const SAMPLE_POSTS = [
+    {
+        id: 'sample-001',
+        trip_id: null,
+        userName: 'Alex Explorer',
+        userAvatar: '🎭',
+        title: '故宫深度游 · 5 stops',
+        reflection: '在故宫的每一步都是历史的回响，太和殿的壮观让我印象深刻。建议早上 8 点前入园，可以避开人流高峰。',
+        cover_poi_id: 'gugong',
+        cover_image_url: null,
+        created_at: '2024-01-05T08:00:00+00:00',
+        archetype: 'NT'
+    },
+    {
+        id: 'sample-002',
+        trip_id: null,
+        userName: 'Luna Traveler',
+        userAvatar: '🌸',
+        title: 'Historical & Cultural · 4 stops',
+        reflection: '天坛的建筑设计体现了古人的智慧，回音壁的声学效果令人惊叹。推荐下午去，光线很好适合拍照。',
+        cover_poi_id: 'tiantan',
+        cover_image_url: null,
+        created_at: '2024-01-04T14:30:00+00:00',
+        archetype: 'NF'
+    },
+    {
+        id: 'sample-003',
+        trip_id: null,
+        userName: 'David Historian',
+        userAvatar: '�',
+        title: '颐和园半日游 · 3 stops',
+        reflection: '颐和园的湖光山色美不胜收，长廊的彩绘值得细细品味。建议预留至少 3 小时游览。',
+        cover_poi_id: 'yiheyuan',
+        cover_image_url: null,
+        created_at: '2024-01-03T10:00:00+00:00',
+        archetype: 'SJ'
+    }
+];
+
+Page({
+    data: {
+        posts: [],
+        layoutConfigs: [],
+        focusedIndex: null,
+        selectedPost: null,
+        isRefreshing: false,
+        showPublishModal: false,
+        newPost: {
+            title: '',
+            content: '',
+            imageUrl: '',
+            route: []
+        }
+    },
+
+    onLoad() {
+        console.log('[Community] onLoad 页面加载');
+        this.generateLayout(); // Keep mock layout for now
+    },
+
+    onShow() {
+        console.log('[Community] onShow 页面显示');
+        
+        // 设置 TabBar 选中状态
+        if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+            this.getTabBar().setData({
+                selected: 2
+            })
+        }
+
+        // 🔥 拉取真实的社区分享数据
+        this.fetchPosts();
+
+        // 🔥 应用待聚焦的 post（如果有）
+        this.applyPendingPostFocus();
+    },
+
+    /**
+     * 拉取社区分享列表
+     */
+    fetchPosts() {
+        console.log('[fetchPosts] 🚀 开始拉取社区分享列表');
+
+        const url = `${API_BASE_URL}/api/posts?limit=20`;
+        console.log('[fetchPosts] 📤 请求 URL:', url);
+
+        wx.request({
+            url: url,
+            method: 'GET',
+            success: (res) => {
+                console.log('[fetchPosts] 📥 响应 statusCode:', res.statusCode);
+                console.log('[fetchPosts] 📥 响应 data:', res.data);
+
+                if (res.statusCode >= 200 && res.statusCode < 300) {
+                    const posts = res.data || [];
+                    console.log('[fetchPosts] ✅ 成功获取', posts.length, '条分享');
+
+                    // 🔥 转换后端数据格式为前端展示格式
+                    const formattedPosts = posts.map((post, index) => {
+                        // 🔥 优先使用 cover_image_url，否则使用 cover_poi_id 的本地图片
+                        let imageUrl = '';
+                        if (post.cover_image_url) {
+                            // 用户上传的图片
+                            imageUrl = `${API_BASE_URL}${post.cover_image_url}`;
+                        } else if (post.cover_poi_id) {
+                            // POI 默认图片
+                            imageUrl = `/image/attractions/${post.cover_poi_id}.png`;
+                        } else {
+                            // 兜底图片
+                            imageUrl = '/image/attractions/default.png';
+                        }
+
+                        // 🔥 使用 reflection 作为摘要
+                        const summary = post.reflection || post.title || '暂无摘要';
+
+                        return {
+                            id: post.id,
+                            trip_id: post.trip_id, // 🔥 保留 trip_id 用于点击跳转到详情页
+                            userName: 'Explorer', // 默认用户名（后续可从 user_id 查询）
+                            userAvatar: '🧳',
+                            title: post.title,
+                            content: summary,
+                            summary: summary,
+                            reflection: post.reflection, // 🔥 保留原始 reflection
+                            cover_poi_id: post.cover_poi_id || 'default',
+                            cover_image_url: post.cover_image_url, // 🔥 保留原始 cover_image_url
+                            imageUrl: imageUrl,
+                            timestamp: this.formatTimestamp(post.created_at),
+                            created_at: post.created_at, // 🔥 保留原始时间戳
+                            likes: 0,
+                            route: [],
+                            comments: [],
+                            tags: [],
+                            archetype: 'NT' // 默认 archetype
+                        };
+                    });
+
+                    // 生成布局配置
+                    const layoutConfigs = formattedPosts.map(() => ({
+                        rotate: Math.random() * 12 - 6,
+                        x: Math.random() * 16 - 8,
+                        y: 0
+                    }));
+
+                    this.setData({
+                        posts: formattedPosts,
+                        layoutConfigs: layoutConfigs
+                    });
+
+                    console.log('[fetchPosts] ✅ 数据已设置到 data.posts');
+                } else {
+                    console.error('[fetchPosts] ❌ 获取失败:', res);
+                    // 失败时显示 mock 数据
+                    this.generateLayout();
+                }
+            },
+            fail: (err) => {
+                console.error('[fetchPosts] ❌ 网络错误:', err);
+                // 网络错误时显示 mock 数据
+                this.generateLayout();
+            }
+        });
+    },
+
+    /**
+     * 应用待聚焦的 post
+     */
+    applyPendingPostFocus() {
+        console.log('[applyPendingPostFocus] 检查待聚焦的 post');
+
+        try {
+            const pendingPostFocus = wx.getStorageSync('pending_post_focus');
+            
+            if (pendingPostFocus && pendingPostFocus.postId) {
+                console.log('[applyPendingPostFocus] 📌 找到待聚焦的 post:', pendingPostFocus);
+
+                const postId = pendingPostFocus.postId;
+
+                // 🔥 查找对应的 post 索引
+                const postIndex = this.data.posts.findIndex(post => post.id === postId);
+
+                if (postIndex !== -1) {
+                    console.log('[applyPendingPostFocus] ✅ 找到对应 post，索引:', postIndex);
+
+                    // 🔥 高亮该 post（设置为 focused）
+                    this.setData({
+                        focusedIndex: postIndex
+                    });
+
+                    // 🔥 滚动到该 post（延迟一下确保渲染完成）
+                    setTimeout(() => {
+                        wx.pageScrollTo({
+                            selector: `.scattered-ticket:nth-child(${postIndex + 1})`,
+                            duration: 300,
+                            success: () => {
+                                console.log('[applyPendingPostFocus] ✅ 已滚动到目标 post');
+                            },
+                            fail: (err) => {
+                                console.warn('[applyPendingPostFocus] ⚠️ 滚动失败，尝试按索引滚动:', err);
+                                // 备选方案：按估算的位置滚动
+                                const scrollTop = postIndex * 200; // 假设每个卡片约 200px
+                                wx.pageScrollTo({
+                                    scrollTop: scrollTop,
+                                    duration: 300
+                                });
+                            }
+                        });
+                    }, 500);
+
+                    // 🔥 3秒后取消高亮
+                    setTimeout(() => {
+                        this.setData({
+                            focusedIndex: null
+                        });
+                    }, 3000);
+                } else {
+                    console.warn('[applyPendingPostFocus] ⚠️ 未找到对应的 post，可能还未加载');
+                }
+
+                // 🔥 清除 storage
+                wx.removeStorageSync('pending_post_focus');
+                console.log('[applyPendingPostFocus] ✅ 已清除 pending_post_focus');
+            } else {
+                console.log('[applyPendingPostFocus] 没有待聚焦的 post');
+            }
+        } catch (err) {
+            console.error('[applyPendingPostFocus] ❌ 错误:', err);
+        }
+    },
+
+    /**
+     * 格式化时间戳
+     * @param {string} isoString - ISO 8601 时间字符串
+     * @returns {string} 格式化后的时间（如 "2小时前"）
+     */
+    formatTimestamp(isoString) {
+        if (!isoString) return '';
+
+        try {
+            const date = new Date(isoString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 1) return '刚刚';
+            if (diffMins < 60) return `${diffMins}分钟前`;
+            if (diffHours < 24) return `${diffHours}小时前`;
+            if (diffDays < 7) return `${diffDays}天前`;
+
+            // 超过7天显示日期
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            return `${month}月${day}日`;
+        } catch (err) {
+            console.error('[formatTimestamp] 错误:', err);
+            return '';
+        }
+    },
+
+    generateLayout() {
+        // Duplicate posts to make the list longer for demo
+        const pool = [...COMMUNITY_POSTS, ...COMMUNITY_POSTS];
+        const shuffled = pool.sort(() => 0.5 - Math.random()).slice(0, 6);
+
+        // Ensure unique IDs for the view using a random string and index
+        const posts = shuffled.map((post, index) => ({
+            ...post,
+            id: `${post.id}-${index}-${Math.random().toString(36).substr(2, 9)}`
+        }));
+
+        const layoutConfigs = posts.map(() => ({
+            rotate: Math.random() * 12 - 6,
+            x: Math.random() * 16 - 8,
+            y: 0
+        }));
+
+        this.setData({
+            posts,
+            layoutConfigs,
+            focusedIndex: null,
+            selectedPost: null
+        });
+    },
+
+    onPullDownRefresh() {
+        this.setData({
+            isRefreshing: true,
+            focusedIndex: null,
+            selectedPost: null
+        });
+        setTimeout(() => {
+            this.generateLayout();
+            this.setData({ isRefreshing: false });
+            // wx.stopPullDownRefresh(); // Removed as we use scroll-view refresher
+        }, 1000);
+    },
+
+    // --- Publish Logic ---
+    openPublishModal() {
+        this.setData({
+            showPublishModal: true,
+            newPost: {
+                title: '',
+                content: '',
+                imageUrl: '',
+                route: []
+            }
+        });
+    },
+
+    closePublishModal() {
+        this.setData({ showPublishModal: false });
+    },
+
+    handleImageUpload() {
+        wx.chooseMedia({
+            count: 1,
+            mediaType: ['image'],
+            sourceType: ['album', 'camera'],
+            success: (res) => {
+                const tempFilePath = res.tempFiles[0].tempFilePath;
+                this.setData({
+                    'newPost.imageUrl': tempFilePath
+                });
+            }
+        });
+    },
+
+    handleImportItinerary() {
+        // Mock importing from history
+        const mockHistory = ['Hall of Supreme Harmony', 'Meridian Gate', 'Jingshan Park'];
+        this.setData({
+            'newPost.route': mockHistory
+        });
+        wx.showToast({
+            title: 'Itinerary Imported',
+            icon: 'success'
+        });
+    },
+
+    handleTitleInput(e) {
+        this.setData({ 'newPost.title': e.detail.value });
+    },
+
+    handleContentInput(e) {
+        this.setData({ 'newPost.content': e.detail.value });
+    },
+
+    handleSubmitPost() {
+        const { title, content, imageUrl, route } = this.data.newPost;
+
+        if (!title || !content) {
+            wx.showToast({ title: 'Please fill all fields', icon: 'none' });
+            return;
+        }
+
+        const newPost = {
+            id: `new_${Date.now()}`,
+            userName: 'Me', // Current user
+            userAvatar: '👤',
+            mbti: 'INTJ', // Default or fetch from user profile
+            archetype: 'NT',
+            title,
+            locationName: 'Beijing',
+            imageUrl: imageUrl || 'https://picsum.photos/seed/new/800/600', // Fallback image
+            content,
+            likes: 0,
+            route: route.length ? route : ['Explored Beijing'],
+            comments: [],
+            tags: ['#NewPost'],
+            timestamp: 'Just now'
+        };
+
+        // Add to top of posts
+        const updatedPosts = [newPost, ...this.data.posts];
+
+        // Update layout configs to accommodate new post
+        const newLayout = {
+            rotate: Math.random() * 6 - 3, // Less rotation for the top one maybe?
+            x: Math.random() * 10 - 5,
+            y: 0
+        };
+        const updatedLayouts = [newLayout, ...this.data.layoutConfigs];
+
+        this.setData({
+            posts: updatedPosts,
+            layoutConfigs: updatedLayouts,
+            showPublishModal: false,
+            focusedIndex: null
+        });
+
+        wx.showToast({ title: 'Published!', icon: 'success' });
+
+        // Scroll to top
+        wx.pageScrollTo({ scrollTop: 0 });
+    },
+    // --- End Publish Logic ---
+
+    /**
+     * 点击 post 卡片
+     * @param {Object} e - 事件对象
+     */
+    handlePostClick(e) {
+        const post = e.detail.post;
+        console.log('[handlePostClick] 🎯 点击 post:', post);
+
+        // 🔥 获取 trip_id
+        const tripId = post.trip_id;
+
+        if (!tripId) {
+            console.error('[handlePostClick] ❌ post 缺少 trip_id:', post);
+            wx.showToast({
+                title: 'trip_id 缺失',
+                icon: 'none',
+                duration: 2000
+            });
+            return;
+        }
+
+        console.log('[handlePostClick] 🔍 trip_id:', tripId);
+
+        // 🔥 写入 last_trip_id 到 storage
+        wx.setStorageSync('last_trip_id', tripId);
+        console.log('[handlePostClick] ✅ 已写入 last_trip_id:', tripId);
+
+        // 🔥 跳转到 Plan 页
+        wx.switchTab({
+            url: '/pages/plan/index',
+            success: () => {
+                console.log('[handlePostClick] ✅ 已成功切换到 Plan 页');
+            },
+            fail: (err) => {
+                console.error('[handlePostClick] ❌ switchTab 失败:', err);
+            }
+        });
+    },
+
+    handlePostLongPress(e) {
+        const index = e.detail.index;
+        // Toggle focus: if already focused, unfocus; otherwise focus
+        if (this.data.focusedIndex === index) {
+            this.setData({ focusedIndex: null });
+        } else {
+            this.setData({ focusedIndex: index });
+        }
+    },
+
+    closeModal() {
+        this.setData({ selectedPost: null });
+    },
+
+    // Prevent bubbling
+    noop() { }
+})

@@ -1,0 +1,7 @@
+# Minimal dependencies for running the workbench (FastAPI + Streamlit)
+fastapi
+uvicorn
+python-multipart
+streamlit
+requests
+openpyxl

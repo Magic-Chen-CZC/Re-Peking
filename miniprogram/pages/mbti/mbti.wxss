@@ -1,0 +1,340 @@
+/* ============ Container ============ */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding-top: 60rpx;  /* 标题向下移动约 1cm */
+}
+
+/* Background Image */
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;  /* 改为 0，确保显示 */
+}
+
+/* ============ Header ============ */
+.header {
+  padding-bottom: 10rpx;
+  text-align: center;
+  z-index: 10;
+}
+
+.header-title {
+  font-size: 32rpx;
+  color: #D24E44;
+  font-weight: 900;
+  font-family: 'Source Han Serif SC', 'Songti SC', serif;
+  line-height: 46rpx;
+}
+
+/* ============ Bubble Container ============ */
+.bubble-container {
+  flex: 1;
+  position: relative;
+  width: 100%;
+}
+
+/* ============ Common Bubble Styles ============ */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* 垂直居中 */
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.bubble:active, .bubble.active {
+  transform: scale(1.05);
+  z-index: 50 !important;
+}
+
+/* ============ Bubble Decoration Layer (Mini Blobs) ============ */
+.bubble-decor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ============ Mini Blob (Small Circle with MBTI Code) ============ */
+.mini-blob {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Source Han Serif SC', 'Songti SC', serif;
+  font-weight: 900;
+  box-sizing: border-box;
+  /* Center text inside */
+  text-align: center;
+}
+
+/* ============ Glassmorphism Layer (Between blobs and text) ============ */
+.bubble-glass {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);  /* 白色覆盖感 */
+  backdrop-filter: blur(10px) saturate(120%);  /* 更强模糊 + 颗粒感 */
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ============ Bubble Content Layer (Above glass) ============ */
+.bubble-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* 垂直居中 */
+  align-items: center;
+}
+
+/* ============ Description Text ============ */
+.bubble-desc {
+  font-family: 'Source Han Serif SC', 'Songti SC', serif;
+  font-weight: 900;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  text-align: center;
+  max-width: 90%;
+  margin-bottom: 16rpx;
+}
+
+/* ============ Select Button ============ */
+.select-btn {
+  width: 158rpx;
+  height: 46rpx;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Source Han Serif SC', 'Songti SC', serif;
+  font-weight: 900;
+  font-size: 32rpx;
+  line-height: 46rpx;
+  color: #FFFFFF;
+}
+
+/* ============ Blue Bubble ============ */
+.bubble.blue {
+  width: 360rpx;
+  height: 360rpx;
+  top: 2%;
+  left: 2%;  /* 向中聚拢 */
+  background: rgba(0, 186, 233, 0.17);
+  border: 2rpx solid #00BAE9;
+  animation: float-blue 8s ease-in-out infinite;
+}
+
+.bubble.blue .mini-blob {
+  width: 114rpx;
+  height: 114rpx;
+  background: rgba(0, 186, 233, 0.5);
+  border: 2rpx solid #00BAE9;
+  color: #0099C5;
+  font-size: 40rpx;
+  line-height: 114rpx;
+}
+
+.bubble.blue .bubble-desc {
+  color: #0091CE;
+}
+
+.bubble.blue .select-btn {
+  background: #0099C4;
+}
+
+/* ============ Yellow Bubble ============ */
+.bubble.yellow {
+  width: 344rpx;
+  height: 344rpx;
+  top: 16%;
+  right: 2%;  /* 向中聚拢 */
+  background: rgba(255, 224, 97, 0.17);
+  border: 2rpx solid #FCC900;
+  animation: float-yellow 7s ease-in-out infinite;
+}
+
+.bubble.yellow .mini-blob {
+  width: 114rpx;
+  height: 114rpx;
+  background: rgba(252, 201, 0, 0.5);
+  border: 2rpx solid #FCC900;
+  color: #DBBB00;
+  font-size: 40rpx;
+  line-height: 114rpx;
+}
+
+.bubble.yellow .bubble-desc {
+  color: #E79100;
+}
+
+.bubble.yellow .select-btn {
+  background: #E79100;
+}
+
+/* ============ Green Bubble ============ */
+.bubble.green {
+  width: 470rpx;
+  height: 470rpx;
+  top: 32%;
+  left: 2%;  /* 向中聚拢 */
+  background: rgba(129, 207, 74, 0.2);
+  border: 2rpx solid #81CF4A;
+  animation: float-green 9s ease-in-out infinite;
+}
+
+.bubble.green .mini-blob {
+  width: 148rpx;
+  height: 148rpx;
+  background: rgba(129, 207, 74, 0.5);
+  border: 2rpx solid #81CF4A;
+  color: #00A430;
+  font-size: 40rpx;
+  line-height: 148rpx;
+}
+
+.bubble.green .bubble-desc {
+  color: #00860F;
+}
+
+.bubble.green .select-btn {
+  background: #00A430;
+}
+
+/* ============ Purple Bubble ============ */
+.bubble.purple {
+  width: 370rpx;
+  height: 370rpx;
+  top: 58%;
+  right: 2%;  /* 向中聚拢 */
+  background: rgba(202, 179, 236, 0.17);
+  border: 2rpx solid #9E6FE2;
+  animation: float-purple 8s ease-in-out infinite;
+}
+
+.bubble.purple .mini-blob {
+  width: 114rpx;
+  height: 114rpx;
+  background: rgba(158, 111, 226, 0.5);
+  border: 2rpx solid #9E6FE2;
+  color: #8149C4;
+  font-size: 40rpx;
+  line-height: 114rpx;
+}
+
+.bubble.purple .bubble-desc {
+  color: #8149C4;
+}
+
+.bubble.purple .select-btn {
+  background: #8149C4;
+}
+
+/* ============ Footer ============ */
+.footer {
+  position: absolute;
+  bottom: 50rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.skip-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom: 8rpx;
+}
+
+.skip-text {
+  font-size: 24rpx;
+  color: #D24E44;
+  font-weight: 500;
+}
+
+/* ============ Animations ============ */
+/* Blue: 左上方向漂浮 */
+@keyframes float-blue {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-5px, -8px);
+  }
+  50% {
+    transform: translate(-8px, -5px);
+  }
+  75% {
+    transform: translate(-3px, -10px);
+  }
+}
+
+/* Yellow: 右上方向漂浮 */
+@keyframes float-yellow {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(6px, -6px);
+  }
+  50% {
+    transform: translate(4px, -10px);
+  }
+  75% {
+    transform: translate(8px, -4px);
+  }
+}
+
+/* Green: 左下方向漂浮 */
+@keyframes float-green {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-6px, 5px);
+  }
+  50% {
+    transform: translate(-10px, 8px);
+  }
+  75% {
+    transform: translate(-4px, 6px);
+  }
+}
+
+/* Purple: 右下方向漂浮 */
+@keyframes float-purple {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(5px, 6px);
+  }
+  50% {
+    transform: translate(8px, 4px);
+  }
+  75% {
+    transform: translate(6px, 8px);
+  }
+}

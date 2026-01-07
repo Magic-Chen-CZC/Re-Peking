@@ -1,0 +1,334 @@
+/* ============ Container ============ */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 40rpx 0 180rpx;  /* 去掉左右边距 */
+  box-sizing: border-box;
+}
+
+/* Background */
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.gradient-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Theme-based Gradient Overlays */
+.gradient-overlay.theme-blue {
+  background: linear-gradient(180deg, rgba(0, 186, 233, 0.1) 0%, rgba(226, 210, 185, 0.3) 100%);
+}
+.gradient-overlay.theme-yellow {
+  background: linear-gradient(180deg, rgba(252, 201, 0, 0.1) 0%, rgba(226, 210, 185, 0.3) 100%);
+}
+.gradient-overlay.theme-green {
+  background: linear-gradient(180deg, rgba(129, 207, 74, 0.1) 0%, rgba(226, 210, 185, 0.3) 100%);
+}
+.gradient-overlay.theme-purple {
+  background: linear-gradient(180deg, rgba(158, 111, 226, 0.1) 0%, rgba(226, 210, 185, 0.3) 100%);
+}
+.gradient-overlay.theme-grey {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(226, 210, 185, 0.3) 100%);
+}
+
+/* ============ MBTI Badge Container (Outside Card) ============ */
+.mbti-badge-container {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 24rpx;
+}
+
+.mbti-badge {
+  display: inline-block;
+  padding: 16rpx 40rpx;
+  border-radius: 12rpx;
+  font-size: 36rpx;
+  font-weight: 900;
+  font-family: 'Source Han Serif SC', 'Songti SC', serif;
+  letter-spacing: 6rpx;
+  border: 3rpx solid;
+  margin-bottom: 16rpx;
+}
+
+/* Theme-based Badge Colors */
+.mbti-badge.theme-blue {
+  background: rgba(0, 186, 233, 0.15);
+  border-color: #00BAE9;
+  color: #0099C5;
+}
+.mbti-badge.theme-yellow {
+  background: rgba(252, 201, 0, 0.15);
+  border-color: #FCC900;
+  color: #DBBB00;
+}
+.mbti-badge.theme-green {
+  background: rgba(129, 207, 74, 0.15);
+  border-color: #81CF4A;
+  color: #00A430;
+}
+.mbti-badge.theme-purple {
+  background: rgba(158, 111, 226, 0.15);
+  border-color: #9E6FE2;
+  color: #8149C4;
+}
+.mbti-badge.theme-grey {
+  background: rgba(128, 128, 128, 0.15);
+  border-color: #888;
+  color: #666;
+}
+
+.mbti-subtitle {
+  display: block;
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 600;
+  font-family: 'Source Han Serif SC', 'Songti SC', serif;
+  letter-spacing: 2rpx;
+}
+
+/* ============ Persona Card ============ */
+.persona-card {
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16rpx;
+  padding: 16rpx 12rpx;
+  margin: 0 auto;
+  width: calc(100vw - 40rpx);
+  box-shadow: 0 8rpx 32rpx rgba(188, 147, 81, 0.15);
+  border: 2rpx solid rgba(188, 147, 81, 0.2);
+  flex: 1;
+  min-height: 280rpx;
+  max-height: 550rpx;  /* 拉长列表框 */
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Theme-based Card Glow */
+.persona-card.theme-blue {
+  box-shadow: 0 8rpx 32rpx rgba(0, 186, 233, 0.2), inset 0 0 40rpx rgba(0, 186, 233, 0.05);
+}
+.persona-card.theme-yellow {
+  box-shadow: 0 8rpx 32rpx rgba(252, 201, 0, 0.2), inset 0 0 40rpx rgba(252, 201, 0, 0.05);
+}
+.persona-card.theme-green {
+  box-shadow: 0 8rpx 32rpx rgba(129, 207, 74, 0.2), inset 0 0 40rpx rgba(129, 207, 74, 0.05);
+}
+.persona-card.theme-purple {
+  box-shadow: 0 8rpx 32rpx rgba(158, 111, 226, 0.2), inset 0 0 40rpx rgba(158, 111, 226, 0.05);
+}
+
+/* Card Header */
+.card-header {
+  text-align: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid rgba(188, 147, 81, 0.2);
+}
+
+.card-header text {
+  font-size: 26rpx;
+  color: #8B6217;
+  font-weight: 500;
+}
+
+/* ============ Interests List ============ */
+.interests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  width: 100%;
+}
+
+.interest-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 20rpx;
+  background: rgba(219, 86, 46, 0.08);
+  border-radius: 12rpx;
+  border-left: 6rpx solid #DB562E;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.interest-item.route-item {
+  background: rgba(188, 147, 81, 0.08);
+  border-left-color: #BC9351;
+}
+
+.interest-item.text-item {
+  background: rgba(198, 55, 7, 0.05);
+  border-left-color: #C63707;
+}
+
+.interest-icon {
+  font-size: 32rpx;
+  margin-right: 16rpx;
+}
+
+.interest-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  flex: 1;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40rpx;
+}
+
+.empty-state text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* ============ Decorative Divider ============ */
+.divider-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32rpx auto;
+  z-index: 10;
+}
+
+.divider-line {
+  flex: 1;
+  height: 2rpx;
+  background: linear-gradient(90deg, transparent 0%, rgba(188, 147, 81, 0.4) 50%, transparent 100%);
+}
+
+.divider-icon {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 6rpx;
+  background: rgba(188, 147, 81, 0.1);
+  border: 2rpx solid rgba(188, 147, 81, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 12rpx;
+  transform: rotate(45deg);
+}
+
+.divider-icon text {
+  font-size: 24rpx;
+  color: #BC9351;
+  font-family: 'Source Han Serif SC', 'Songti SC', serif;
+  font-weight: 700;
+  transform: rotate(-45deg);
+}
+
+/* ============ Preferences Section ============ */
+.preferences-section {
+  position: relative;
+  z-index: 10;
+}
+
+.pref-group {
+  margin-bottom: 28rpx;
+}
+
+.pref-label {
+  font-size: 26rpx;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 12rpx;
+  display: block;
+  font-family: 'Source Han Serif SC', 'Songti SC', serif;
+}
+
+.pref-cards {
+  display: flex;
+  gap: 20rpx;
+}
+
+.pref-card {
+  flex: 1;
+  height: 110rpx;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx solid #E0E0E0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.pref-card.selected {
+  background: linear-gradient(135deg, #C63707 0%, #E04B1A 100%);
+  border-color: #C63707;
+  transform: scale(1.02);
+  box-shadow: 0 8rpx 24rpx rgba(198, 55, 7, 0.3);
+}
+
+.pref-card:active {
+  transform: scale(0.97);
+}
+
+.pref-card-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  font-family: 'Source Han Serif SC', 'Songti SC', serif;
+  color: #333;
+  white-space: nowrap;
+}
+
+.pref-card.selected .pref-card-title {
+  color: #FFFFFF;
+}
+
+/* ============ Submit Button ============ */
+.submit-btn {
+  position: fixed;
+  bottom: 60rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48rpx);
+  max-width: 680rpx;
+  height: 96rpx;
+  background: linear-gradient(135deg, #C63707 0%, #E04B1A 100%);
+  border-radius: 48rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  box-shadow: 0 10rpx 30rpx rgba(198, 55, 7, 0.4);
+  transition: all 0.3s ease;
+}
+
+.submit-btn:active {
+  transform: translateX(-50%) scale(0.98);
+}
+
+.submit-btn.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.submit-btn text {
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 700;
+  font-family: 'Source Han Serif SC', 'Songti SC', serif;
+  letter-spacing: 6rpx;
+  white-space: nowrap;
+}

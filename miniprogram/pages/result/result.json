@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "旅行地图",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black",
+    "disableScroll": true,
+    "navigationStyle": "custom"
+}

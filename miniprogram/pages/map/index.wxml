@@ -1,0 +1,85 @@
+<view class="container">
+  <map id="tripMap" class="main-map" latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="onMarkerTap" bindcallouttap="onMarkerTap" bindtap="onMapTap" enable-poi="{{false}}" show-location></map>
+
+  <view class="backdrop-layer {{viewMode === 'detail' ? 'active' : ''}}" bindtap="onDetailClose"></view>
+
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px">
+  </view>
+
+  <view wx:if="{{viewMode === 'mini'}}" class="mini-button" bindtap="onMiniButtonTap">
+    <view class="poker-deck-icon">
+      <view class="deck-card-mini deck-1"></view>
+      <view class="deck-card-mini deck-2"></view>
+      <view class="deck-card-mini deck-3"></view>
+    </view>
+    <text class="mini-text">{{attractions[activeCardIndex].distance}}</text>
+  </view>
+
+  <view wx:if="{{viewMode === 'browse'}}" class="browse-container">
+    <view class="deck-area">
+      <view wx:for="{{attractions}}" wx:key="id" class="deck-card {{index === activeCardIndex ? 'active' : ''}}" style="transform: {{cardStyles[index].transform}}; opacity: {{cardStyles[index].opacity}}; z-index: {{cardStyles[index].zIndex}};" bindtap="onCardTap" bindtouchstart="onCardTouchStart" bindtouchmove="onCardTouchMove" bindtouchend="onCardTouchEnd" data-index="{{index}}">
+        <view class="card-image-section">
+          <image class="card-image" src="{{item.imageUrl}}" mode="aspectFill" binderror="onImgError" data-index="{{index}}"></image>
+        </view>
+        <view class="card-text-section">
+          <view class="card-top">
+            <view class="card-header">
+              <text class="card-title">{{item.name}}</text>
+              <text class="card-play-icon">▶</text>
+            </view>
+            <text class="card-distance">{{item.distance}} AWAY</text>
+          </view>
+          <view wx:if="{{index === activeCardIndex}}" class="card-explore">
+            <text class="explore-text">Explore now</text>
+            <text class="explore-arrow">→</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{viewMode === 'detail'}}" class="detail-sheet">
+    <view class="detail-handle"></view>
+    <view class="detail-nav">
+      <view class="detail-close" bindtap="onDetailClose"><text class="close-icon">〈</text></view>
+      <view class="detail-actions">
+        <view class="action-btn"><text>↗</text></view>
+        <view class="action-btn"><text>♡</text></view>
+      </view>
+    </view>
+    <scroll-view class="detail-scroll" scroll-y>
+      <view class="detail-hero">
+        <image class="hero-image" src="{{selectedAttraction.imageUrl}}" mode="aspectFill" binderror="onImgError"></image>
+        <view class="hero-overlay">
+          <text class="hero-title">{{selectedAttraction.name}}</text>
+          <text class="hero-subtitle">{{selectedAttraction.distance}} away from your location</text>
+        </view>
+      </view>
+      <view class="audio-player">
+        <view class="audio-left">
+          <view class="audio-play-btn"><text class="play-icon-large">⏸</text></view>
+          <view class="audio-info">
+            <text class="audio-title">Audio Guide</text>
+            <text class="audio-subtitle">暂无音频</text>
+          </view>
+        </view>
+        <view class="audio-waveform">
+          <view class="wave-bar" wx:for="{{[2,3,2,4,3,2,3,2,3,2,4,2,3,2,3,2,3,2,2,2]}}" wx:key="index" style="height: {{item}}rpx;"></view>
+        </view>
+      </view>
+      <view class="detail-content">
+        <view class="content-section">
+          <view class="section-indicator"></view>
+          <text class="section-text">{{selectedAttraction.detailTitle}}</text>
+        </view>
+        <view class="content-body">
+          <text class="body-text">{{selectedAttraction.detailIntro}}</text>
+          <view class="quote-block"><text class="quote-text">{{selectedAttraction.detailQuote}}</text></view>
+          <text class="body-text">{{selectedAttraction.detailBody[0]}}</text>
+          <text class="body-text">{{selectedAttraction.detailBody[1]}}</text>
+          <text class="body-text">{{selectedAttraction.detailBody[2]}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "ticket-stub": "../../components/ticket-stub/index"
+    },
+    "navigationStyle": "custom"
+}

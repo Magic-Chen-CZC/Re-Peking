@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+
+    
+</head>
+<body >
+    <style>.box { justify-content:center; display:flex; flex-wrap:wrap;  } </style>
+    <div class="box">
+                <div id="ed5d7c32564047b7bb99b6d1c530b6b6" class="chart-container" style="width:600px; height:400px; "></div>
+    <script>
+        var chart_ed5d7c32564047b7bb99b6d1c530b6b6 = echarts.init(
+            document.getElementById('ed5d7c32564047b7bb99b6d1c530b6b6'), 'white', {renderer: 'canvas', locale: 'ZH'});
+        var option_ed5d7c32564047b7bb99b6d1c530b6b6 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "color": [
+        "#5470c6",
+        "#91cc75",
+        "#fac858",
+        "#ee6666",
+        "#73c0de",
+        "#3ba272",
+        "#fc8452",
+        "#9a60b4",
+        "#ea7ccc"
+    ],
+    "series": [
+        {
+            "type": "gauge",
+            "title": {
+                "show": true,
+                "offsetCenter": [
+                    "0%",
+                    "20%"
+                ],
+                "color": "#333",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+                "fontFamily": "sans-serif",
+                "fontSize": 15,
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderWidth": 0,
+                "borderRadius": 0,
+                "padding": 0,
+                "shadowColor": "transparent",
+                "shadowBlur": 0,
+                "shadowOffsetX": 0,
+                "shadowOffsetY": 0,
+                "overflow": "none",
+                "valueAnimation": true
+            },
+            "detail": {
+                "show": true,
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+                "borderColor": "transparent",
+                "offsetCenter": [
+                    "0%",
+                    "40%"
+                ],
+                "formatter": "{value}%",
+                "color": "#464646",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+                "fontFamily": "sans-serif",
+                "fontSize": 15,
+                "borderRadius": 0,
+                "padding": 0,
+                "shadowColor": "transparent",
+                "shadowBlur": 0,
+                "shadowOffsetX": 0,
+                "shadowOffsetY": 0,
+                "overflow": "none",
+                "valueAnimation": true
+            },
+            "min": 0,
+            "max": 100,
+            "splitNumber": 10,
+            "center": [
+                "50%",
+                "50%"
+            ],
+            "radius": "75%",
+            "startAngle": 225,
+            "endAngle": -45,
+            "clockwise": true,
+            "data": [
+                {
+                    "name": "\u70ed\u5ea6",
+                    "value": 100
+                }
+            ],
+            "progress": {
+                "show": false,
+                "overlap": true,
+                "width": 10,
+                "roundCap": false,
+                "clip": false
+            },
+            "anchor": {
+                "show": true,
+                "showAbove": false,
+                "size": 6,
+                "icon": "circle",
+                "offsetCenter": [
+                    0,
+                    0
+                ],
+                "keepAspect": false
+            },
+            "pointer": {
+                "show": true,
+                "length": "80%",
+                "width": 8
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                ""
+            ],
+            "selected": {}
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    }
+};
+        chart_ed5d7c32564047b7bb99b6d1c530b6b6.setOption(option_ed5d7c32564047b7bb99b6d1c530b6b6);
+    </script>
+<br/>                <div id="1ee6f643466540f6a35e72b6e147ffbe" class="chart-container" style="width:600px; height:400px; "></div>
+    <script>
+        var chart_1ee6f643466540f6a35e72b6e147ffbe = echarts.init(
+            document.getElementById('1ee6f643466540f6a35e72b6e147ffbe'), 'white', {renderer: 'canvas', locale: 'ZH'});
+        var option_1ee6f643466540f6a35e72b6e147ffbe = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "color": [
+        "#5470c6",
+        "#91cc75",
+        "#fac858",
+        "#ee6666",
+        "#73c0de",
+        "#3ba272",
+        "#fc8452",
+        "#9a60b4",
+        "#ea7ccc"
+    ],
+    "series": [
+        {
+            "type": "pie",
+            "colorBy": "data",
+            "legendHoverLink": true,
+            "selectedMode": false,
+            "selectedOffset": 10,
+            "clockwise": true,
+            "startAngle": 90,
+            "minAngle": 0,
+            "minShowLabelAngle": 0,
+            "avoidLabelOverlap": true,
+            "stillShowZeroSum": true,
+            "percentPrecision": 2,
+            "showEmptyCircle": true,
+            "emptyCircleStyle": {
+                "color": "lightgray",
+                "borderColor": "#000",
+                "borderWidth": 0,
+                "borderType": "solid",
+                "borderDashOffset": 0,
+                "borderCap": "butt",
+                "borderJoin": "bevel",
+                "borderMiterLimit": 10,
+                "opacity": 1
+            },
+            "data": [
+                {
+                    "name": "\u57ce\u5e02\u66f4\u65b0",
+                    "value": 439
+                },
+                {
+                    "name": "\u8bc4\u4f30\u4e0e\u51b3\u7b56\u6a21\u578b",
+                    "value": 190
+                },
+                {
+                    "name": "\u53ef\u6301\u7eed\u66f4\u65b0",
+                    "value": 162
+                },
+                {
+                    "name": "\u534f\u540c\u4e0e\u7f51\u7edc\u6cbb\u7406",
+                    "value": 148
+                },
+                {
+                    "name": "\u591a\u65b9\u5229\u76ca\u76f8\u5173",
+                    "value": 131
+                },
+                {
+                    "name": "\u793e\u4f1a\u5f71\u54cd\u4e0e\u5305\u5bb9\u6027",
+                    "value": 117
+                },
+                {
+                    "name": "\u516c\u4f17/\u793e\u533a\u53c2\u4e0e",
+                    "value": 110
+                },
+                {
+                    "name": "GIS\u4e0e\u7a7a\u95f4\u5206\u6790",
+                    "value": 99
+                },
+                {
+                    "name": "\u5386\u53f2\u8857\u533a\u4fdd\u62a4",
+                    "value": 87
+                },
+                {
+                    "name": "\u4e61\u6751\u632f\u5174",
+                    "value": 79
+                }
+            ],
+            "radius": [
+                "30%",
+                "55%"
+            ],
+            "center": [
+                "50%",
+                "50%"
+            ],
+            "label": {
+                "show": true,
+                "margin": 8,
+                "valueAnimation": false
+            },
+            "labelLine": {
+                "show": true,
+                "showAbove": false,
+                "length": 15,
+                "length2": 15,
+                "smooth": false,
+                "minTurnAngle": 90,
+                "maxSurfaceAngle": 90
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u57ce\u5e02\u66f4\u65b0",
+                "\u8bc4\u4f30\u4e0e\u51b3\u7b56\u6a21\u578b",
+                "\u53ef\u6301\u7eed\u66f4\u65b0",
+                "\u534f\u540c\u4e0e\u7f51\u7edc\u6cbb\u7406",
+                "\u591a\u65b9\u5229\u76ca\u76f8\u5173",
+                "\u793e\u4f1a\u5f71\u54cd\u4e0e\u5305\u5bb9\u6027",
+                "\u516c\u4f17/\u793e\u533a\u53c2\u4e0e",
+                "GIS\u4e0e\u7a7a\u95f4\u5206\u6790",
+                "\u5386\u53f2\u8857\u533a\u4fdd\u62a4",
+                "\u4e61\u6751\u632f\u5174"
+            ],
+            "selected": {}
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    }
+};
+        chart_1ee6f643466540f6a35e72b6e147ffbe.setOption(option_1ee6f643466540f6a35e72b6e147ffbe);
+    </script>
+<br/>                <div id="85f986c49db14c1fa371ab6b38d3278c" class="chart-container" style="width:1200px; height:400px; "></div>
+    <script>
+        var chart_85f986c49db14c1fa371ab6b38d3278c = echarts.init(
+            document.getElementById('85f986c49db14c1fa371ab6b38d3278c'), 'white', {renderer: 'canvas', locale: 'ZH'});
+        var option_85f986c49db14c1fa371ab6b38d3278c = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "color": [
+        "#5470c6",
+        "#91cc75",
+        "#fac858",
+        "#ee6666",
+        "#73c0de",
+        "#3ba272",
+        "#fc8452",
+        "#9a60b4",
+        "#ea7ccc"
+    ],
+    "series": [
+        {
+            "type": "bar",
+            "name": "\u8bcd\u9891",
+            "legendHoverLink": true,
+            "data": [
+                439,
+                190,
+                162,
+                148,
+                131,
+                117,
+                110,
+                99,
+                87,
+                79,
+                72,
+                57,
+                48,
+                47,
+                43,
+                40,
+                34,
+                33,
+                32,
+                31
+            ],
+            "realtimeSort": false,
+            "showBackground": false,
+            "stackStrategy": "samesign",
+            "cursor": "pointer",
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "margin": 8,
+                "valueAnimation": false
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u8bcd\u9891"
+            ],
+            "selected": {}
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0,
+            "data": [
+                "\u57ce\u5e02\u66f4\u65b0",
+                "\u8bc4\u4f30\u4e0e\u51b3\u7b56\u6a21\u578b",
+                "\u53ef\u6301\u7eed\u66f4\u65b0",
+                "\u534f\u540c\u4e0e\u7f51\u7edc\u6cbb\u7406",
+                "\u591a\u65b9\u5229\u76ca\u76f8\u5173",
+                "\u793e\u4f1a\u5f71\u54cd\u4e0e\u5305\u5bb9\u6027",
+                "\u516c\u4f17/\u793e\u533a\u53c2\u4e0e",
+                "GIS\u4e0e\u7a7a\u95f4\u5206\u6790",
+                "\u5386\u53f2\u8857\u533a\u4fdd\u62a4",
+                "\u4e61\u6751\u632f\u5174",
+                "\u751f\u6001\u4fee\u590d\u4e0e\u7eff\u8272\u57fa\u7840\u8bbe\u65bd",
+                "\u571f\u5730\u7ecf\u6d4e\u4e0e\u4ea7\u6743",
+                "\u8001\u65e7\u5c0f\u533a\u6539\u9020",
+                "\u5927\u6570\u636e\u4e0e\u591a\u6e90\u6570\u636e",
+                "\u9065\u611f\u6280\u672f",
+                "\u6570\u5b57\u6280\u672f\u4e0e\u667a\u6167\u57ce\u5e02",
+                "\u516c\u5171\u7a7a\u95f4\u66f4\u65b0",
+                "\u4f4e\u78b3\u4e0e\u53cc\u78b3\u76ee\u6807",
+                "\u57ce\u5e02\u97e7\u6027",
+                "\u6295\u878d\u8d44\u4e0e\u8fd0\u8425\u6a21\u5f0f"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0
+        }
+    ]
+};
+        chart_85f986c49db14c1fa371ab6b38d3278c.setOption(option_85f986c49db14c1fa371ab6b38d3278c);
+    </script>
+<br/>                <div id="fb7322f5ccc34006a6256ed5ab91ef0f" class="chart-container" style="width:1200px; height:400px; "></div>
+    <script>
+        var chart_fb7322f5ccc34006a6256ed5ab91ef0f = echarts.init(
+            document.getElementById('fb7322f5ccc34006a6256ed5ab91ef0f'), 'white', {renderer: 'canvas', locale: 'ZH'});
+        var option_fb7322f5ccc34006a6256ed5ab91ef0f = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "color": [
+        "#5470c6",
+        "#91cc75",
+        "#fac858",
+        "#ee6666",
+        "#73c0de",
+        "#3ba272",
+        "#fc8452",
+        "#9a60b4",
+        "#ea7ccc"
+    ],
+    "series": [
+        {
+            "type": "line",
+            "name": "\u8d8b\u52bf",
+            "connectNulls": false,
+            "xAxisIndex": 0,
+            "symbolSize": 4,
+            "showSymbol": true,
+            "smooth": false,
+            "clip": true,
+            "step": false,
+            "stackStrategy": "samesign",
+            "data": [
+                [
+                    "\u57ce\u5e02\u66f4\u65b0",
+                    439
+                ],
+                [
+                    "\u8bc4\u4f30\u4e0e\u51b3\u7b56\u6a21\u578b",
+                    190
+                ],
+                [
+                    "\u53ef\u6301\u7eed\u66f4\u65b0",
+                    162
+                ],
+                [
+                    "\u534f\u540c\u4e0e\u7f51\u7edc\u6cbb\u7406",
+                    148
+                ],
+                [
+                    "\u591a\u65b9\u5229\u76ca\u76f8\u5173",
+                    131
+                ],
+                [
+                    "\u793e\u4f1a\u5f71\u54cd\u4e0e\u5305\u5bb9\u6027",
+                    117
+                ],
+                [
+                    "\u516c\u4f17/\u793e\u533a\u53c2\u4e0e",
+                    110
+                ],
+                [
+                    "GIS\u4e0e\u7a7a\u95f4\u5206\u6790",
+                    99
+                ],
+                [
+                    "\u5386\u53f2\u8857\u533a\u4fdd\u62a4",
+                    87
+                ],
+                [
+                    "\u4e61\u6751\u632f\u5174",
+                    79
+                ],
+                [
+                    "\u751f\u6001\u4fee\u590d\u4e0e\u7eff\u8272\u57fa\u7840\u8bbe\u65bd",
+                    72
+                ],
+                [
+                    "\u571f\u5730\u7ecf\u6d4e\u4e0e\u4ea7\u6743",
+                    57
+                ],
+                [
+                    "\u8001\u65e7\u5c0f\u533a\u6539\u9020",
+                    48
+                ],
+                [
+                    "\u5927\u6570\u636e\u4e0e\u591a\u6e90\u6570\u636e",
+                    47
+                ],
+                [
+                    "\u9065\u611f\u6280\u672f",
+                    43
+                ],
+                [
+                    "\u6570\u5b57\u6280\u672f\u4e0e\u667a\u6167\u57ce\u5e02",
+                    40
+                ],
+                [
+                    "\u516c\u5171\u7a7a\u95f4\u66f4\u65b0",
+                    34
+                ],
+                [
+                    "\u4f4e\u78b3\u4e0e\u53cc\u78b3\u76ee\u6807",
+                    33
+                ],
+                [
+                    "\u57ce\u5e02\u97e7\u6027",
+                    32
+                ],
+                [
+                    "\u6295\u878d\u8d44\u4e0e\u8fd0\u8425\u6a21\u5f0f",
+                    31
+                ]
+            ],
+            "hoverAnimation": true,
+            "label": {
+                "show": true,
+                "margin": 8,
+                "valueAnimation": false
+            },
+            "logBase": 10,
+            "seriesLayoutBy": "column",
+            "lineStyle": {
+                "show": true,
+                "width": 1,
+                "opacity": 1,
+                "curveness": 0,
+                "type": "solid"
+            },
+            "areaStyle": {
+                "opacity": 0
+            },
+            "zlevel": 0,
+            "z": 0
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u8d8b\u52bf"
+            ],
+            "selected": {}
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0,
+            "data": [
+                "\u57ce\u5e02\u66f4\u65b0",
+                "\u8bc4\u4f30\u4e0e\u51b3\u7b56\u6a21\u578b",
+                "\u53ef\u6301\u7eed\u66f4\u65b0",
+                "\u534f\u540c\u4e0e\u7f51\u7edc\u6cbb\u7406",
+                "\u591a\u65b9\u5229\u76ca\u76f8\u5173",
+                "\u793e\u4f1a\u5f71\u54cd\u4e0e\u5305\u5bb9\u6027",
+                "\u516c\u4f17/\u793e\u533a\u53c2\u4e0e",
+                "GIS\u4e0e\u7a7a\u95f4\u5206\u6790",
+                "\u5386\u53f2\u8857\u533a\u4fdd\u62a4",
+                "\u4e61\u6751\u632f\u5174",
+                "\u751f\u6001\u4fee\u590d\u4e0e\u7eff\u8272\u57fa\u7840\u8bbe\u65bd",
+                "\u571f\u5730\u7ecf\u6d4e\u4e0e\u4ea7\u6743",
+                "\u8001\u65e7\u5c0f\u533a\u6539\u9020",
+                "\u5927\u6570\u636e\u4e0e\u591a\u6e90\u6570\u636e",
+                "\u9065\u611f\u6280\u672f",
+                "\u6570\u5b57\u6280\u672f\u4e0e\u667a\u6167\u57ce\u5e02",
+                "\u516c\u5171\u7a7a\u95f4\u66f4\u65b0",
+                "\u4f4e\u78b3\u4e0e\u53cc\u78b3\u76ee\u6807",
+                "\u57ce\u5e02\u97e7\u6027",
+                "\u6295\u878d\u8d44\u4e0e\u8fd0\u8425\u6a21\u5f0f"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0
+        }
+    ]
+};
+        chart_fb7322f5ccc34006a6256ed5ab91ef0f.setOption(option_fb7322f5ccc34006a6256ed5ab91ef0f);
+    </script>
+<br/>    </div>
+    <script>
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+
+# Virtualenv
+venv/
+.venv/
+**/venv/
+
+# Env files
+.env
+.env.*
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# WeChat Mini Program
+miniprogram/node_modules/
+miniprogram/dist/
+
+# Data pipeline artifacts (if generated locally)
+BeijingGuideData/data/review/
+BeijingGuideData/data/chroma_db/
+
+# Backend local storage (if regenerated)
+bakend/storage/

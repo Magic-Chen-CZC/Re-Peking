@@ -1,0 +1,158 @@
+.graphic-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background Colors */
+.bg-dark-1 { background-color: #2a2a2a; }
+.bg-dark-2 { background-color: #1e293b; }
+.bg-dark-3 { background-color: #3f3f46; }
+.bg-black { background-color: #000000; }
+.bg-light { background-color: #f4f4f5; }
+
+/* Pattern Background (Simulated with CSS) */
+.pattern-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#888 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+.opacity-20 { opacity: 0.2; }
+.opacity-10 { opacity: 0.1; }
+
+/* Shapes */
+.shape-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 16rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stroke-white-20 { border-color: rgba(255, 255, 255, 0.2); }
+.stroke-gray-300 { border-color: #d1d5db; }
+
+.shape-circle {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  border: 2rpx solid;
+  position: absolute;
+}
+.shape-circle-dashed {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  border: 1rpx dashed;
+  position: absolute;
+}
+
+.shape-triangle {
+  width: 0;
+  height: 0;
+  border-left: 40rpx solid transparent;
+  border-right: 40rpx solid transparent;
+  border-bottom: 80rpx solid; /* Simplified triangle */
+  background: transparent;
+  border-color: transparent transparent currentColor transparent; /* This is tricky with border-color classes, let's use a simpler box for now or SVG if possible. Using box for robustness */
+  /* Fallback to a square rotated */
+  width: 60%;
+  height: 60%;
+  border: 2rpx solid;
+  transform: rotate(45deg);
+}
+.shape-line {
+  width: 2rpx;
+  height: 80%;
+  background: currentColor;
+  position: absolute;
+}
+
+.shape-rect {
+  width: 60%;
+  height: 60%;
+  border: 2rpx solid;
+}
+.shape-cross-h {
+  width: 60%;
+  height: 2rpx;
+  background: currentColor;
+  position: absolute;
+}
+.shape-cross-v {
+  height: 60%;
+  width: 2rpx;
+  background: currentColor;
+  position: absolute;
+}
+
+.shape-arch {
+  width: 60%;
+  height: 40%;
+  border: 2rpx solid;
+  border-bottom: none;
+  border-radius: 50% 50% 0 0;
+  margin-top: -20%;
+}
+.shape-arch-dashed {
+  width: 40%;
+  height: 30%;
+  border: 1rpx dashed;
+  border-bottom: none;
+  border-radius: 50% 50% 0 0;
+  margin-top: -10%;
+  position: absolute;
+}
+
+
+/* Number */
+.number {
+  position: absolute;
+  bottom: -24rpx;
+  left: -8rpx;
+  font-size: 80rpx;
+  font-weight: 900;
+  letter-spacing: -4rpx;
+  line-height: 1;
+  font-family: serif;
+}
+.text-white-10 { color: rgba(255, 255, 255, 0.1); }
+.text-gray-200 { color: #e5e7eb; }
+
+/* Meta Info */
+.meta-info {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.meta-label {
+  font-size: 16rpx;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+}
+.meta-value {
+  font-size: 16rpx;
+  font-family: monospace;
+  font-weight: bold;
+}
+.text-white-40 { color: rgba(255, 255, 255, 0.4); }
+.text-white-60 { color: rgba(255, 255, 255, 0.6); }
+.text-gray-400 { color: #9ca3af; }
+.text-gray-500 { color: #6b7280; }

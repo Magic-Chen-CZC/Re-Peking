@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "scattered-ticket": "../../components/scattered-ticket/index"
+    },
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#e5e5e5",
+    "navigationStyle": "custom"
+}

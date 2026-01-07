@@ -1,0 +1,109 @@
+<view class="container">
+  <!-- Background Image -->
+  <image class="bg-image" src="/image/bg-texture.png" mode="aspectFill"></image>
+
+  <!-- Header Title -->
+  <view class="header">
+    <text class="header-title">选择你想要的旅游类型</text>
+  </view>
+
+  <!-- Selection Area -->
+  <view class="bubble-container">
+    <!-- Blue Bubble (Top Left) -->
+    <view 
+      class="bubble blue {{selectedMbti === 'INTJ' ? 'active' : ''}}" 
+      bindtap="onSelectMbti" 
+      data-mbti="INTJ"
+    >
+      <!-- Layer 1: Mini Blobs (behind glass) -->
+      <view class="bubble-decor">
+        <view class="mini-blob" style="top: 5%; left: 22%;">ISTJ</view>
+        <view class="mini-blob" style="top: 5%; left: 54%;">ISFJ</view>
+        <view class="mini-blob" style="top: 38%; left: 5%;">INTJ</view>
+        <view class="mini-blob" style="top: 38%; left: 54%;">ESFJ</view>
+      </view>
+      <!-- Layer 2: Glassmorphism (blur effect) -->
+      <view class="bubble-glass"></view>
+      <!-- Layer 3: Content (clear text above glass) -->
+      <view class="bubble-content">
+        <view class="bubble-desc">
+          <text>可靠、高效、有计划且</text>
+          <text>符合预期的旅行</text>
+        </view>
+        <view class="select-btn">选择</view>
+      </view>
+    </view>
+
+    <!-- Yellow Bubble (Right, overlapping) -->
+    <view 
+      class="bubble yellow {{selectedMbti === 'ESFP' ? 'active' : ''}}" 
+      bindtap="onSelectMbti" 
+      data-mbti="ESFP"
+    >
+      <view class="bubble-decor">
+        <view class="mini-blob" style="top: 8%; left: 10%;">ISTP</view>
+        <view class="mini-blob" style="top: 5%; left: 45%;">ISFP</view>
+        <view class="mini-blob" style="top: 38%; left: 2%;">ESTP</view>
+        <view class="mini-blob" style="top: 40%; left: 55%;">ESFP</view>
+      </view>
+      <view class="bubble-glass"></view>
+      <view class="bubble-content">
+        <view class="bubble-desc">
+          <text>充满乐趣、随心所欲、</text>
+          <text>可以亲身参与的旅行</text>
+        </view>
+        <view class="select-btn">选择</view>
+      </view>
+    </view>
+
+    <!-- Green Bubble (Center-Left, largest) -->
+    <view 
+      class="bubble green {{selectedMbti === 'INFJ' ? 'active' : ''}}" 
+      bindtap="onSelectMbti" 
+      data-mbti="INFJ"
+    >
+      <view class="bubble-decor">
+        <view class="mini-blob" style="top: 8%; left: 12%;">INFJ</view>
+        <view class="mini-blob" style="top: 5%; left: 50%;">INFP</view>
+        <view class="mini-blob" style="top: 35%; left: 5%;">ENFP</view>
+        <view class="mini-blob" style="top: 38%; left: 52%;">ENFJ</view>
+      </view>
+      <view class="bubble-glass"></view>
+      <view class="bubble-content">
+        <view class="bubble-desc">
+          <text>满足精神需求、注重内心</text>
+          <text>体验的旅行方式</text>
+        </view>
+        <view class="select-btn">选择</view>
+      </view>
+    </view>
+
+    <!-- Purple Bubble (Bottom Right) -->
+    <view 
+      class="bubble purple {{selectedMbti === 'ENTP' ? 'active' : ''}}" 
+      bindtap="onSelectMbti" 
+      data-mbti="ENTP"
+    >
+      <view class="bubble-decor">
+        <view class="mini-blob" style="top: 10%; left: 8%;">INTP</view>
+        <view class="mini-blob" style="top: 5%; left: 45%;">INTJ</view>
+        <view class="mini-blob" style="top: 40%; left: 2%;">ENTP</view>
+        <view class="mini-blob" style="top: 38%; left: 55%;">ENTJ</view>
+      </view>
+      <view class="bubble-glass"></view>
+      <view class="bubble-content">
+        <view class="bubble-desc">
+          <text>在旅行中理解事物背后的</text>
+          <text>原理和逻辑</text>
+        </view>
+        <view class="select-btn">选择</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Footer Area -->
+  <view class="footer" bindtap="onSkip">
+    <image class="skip-icon" src="/image/icon-skip.png" mode="aspectFit"></image>
+    <text class="skip-text">跳过</text>
+  </view>
+</view>

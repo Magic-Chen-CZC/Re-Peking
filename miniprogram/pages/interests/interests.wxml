@@ -1,0 +1,156 @@
+<view class="container">
+  <!-- Header -->
+  <view class="header">
+    <text class="kicker">Beijing Explorer</text>
+    <view class="title-stack">
+      <text class="title">京韵</text>
+      <text class="title light">探索</text>
+    </view>
+  </view>
+
+  <!-- Categories -->
+  <scroll-view scroll-x class="category-scroll" show-scrollbar="false">
+    <view class="category-row">
+      <view 
+        class="category-item {{activeCategory === index ? 'active' : ''}}" 
+        wx:for="{{categories}}" 
+        wx:key="id"
+        bindtap="onCategoryTap"
+        data-index="{{index}}"
+      >
+        <text>{{item.name}}</text>
+        <view class="category-dot {{activeCategory === index ? 'active' : ''}}"></view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- Interest Header -->
+  <view class="section-header">
+    <text class="section-label">选择兴趣点（{{selectedTags.length}}/{{maxSelection}}）</text>
+    <view class="refresh-mini" bindtap="onRefresh">
+      <text class="refresh-icon">↻</text>
+      <text class="refresh-text">换一批</text>
+    </view>
+  </view>
+
+  <!-- Tag Grid -->
+  <view class="tag-grid">
+    <view 
+      class="tag-item {{item.selected ? 'selected' : ''}}"
+      wx:for="{{currentAttractions}}"
+      wx:key="id"
+      bindtap="onTagTap"
+      data-id="{{item.id}}"
+      data-name="{{item.name}}"
+    >
+      <text>{{item.name}}</text>
+      <view class="tag-dot" wx:if="{{item.selected}}"></view>
+    </view>
+  </view>
+
+  <!-- Entry Cards -->
+  <view class="entry-cards">
+    <view class="entry-card" bindtap="onRouteSelectTap">
+      <view class="entry-icon entry-icon-compass">
+        <view class="entry-icon-ring"></view>
+        <view class="entry-icon-needle"></view>
+        <view class="entry-icon-dot"></view>
+      </view>
+      <text class="entry-title">经典路线</text>
+      <text class="entry-subtitle">大师级规划</text>
+    </view>
+    <view class="entry-card" bindtap="onTextLinkTap">
+      <view class="entry-icon entry-icon-pen">
+        <view class="entry-icon-line"></view>
+        <view class="entry-icon-tip"></view>
+      </view>
+      <text class="entry-title">自由输入</text>
+      <text class="entry-subtitle">随心定制</text>
+    </view>
+  </view>
+
+  <!-- Dock -->
+  <view class="dock">
+    <view class="dock-panel {{dockExpanded ? 'show' : ''}}" wx:if="{{dockExpanded}}">
+      <view class="dock-panel-header">
+        <text class="dock-panel-title">已选列表</text>
+        <view class="dock-clear" bindtap="clearSelection">清空</view>
+      </view>
+      <view class="dock-tags">
+        <view class="dock-tag" wx:for="{{selectedTags}}" wx:key="id">
+          <text>{{item.name}}</text>
+          <text class="dock-remove" bindtap="onRemoveTag" data-id="{{item.id}}">×</text>
+        </view>
+        <text class="dock-empty" wx:if="{{selectedTags.length === 0 && !selectedRouteId}}">请选择兴趣点</text>
+      </view>
+    </view>
+
+    <view class="dock-bar">
+      <view class="dock-toggle" bindtap="toggleDock">
+        <view class="dock-meta">
+          <text class="dock-kicker">MY TRIP</text>
+          <text class="dock-count">{{selectedTags.length}}/{{maxSelection}}</text>
+        </view>
+        <view class="dock-divider"></view>
+        <view class="dock-dots">
+          <view class="dock-dot" wx:for="{{selectedTags}}" wx:key="id"></view>
+          <view class="dock-dot" wx:if="{{selectedRouteId}}"></view>
+          <text class="dock-empty-text" wx:if="{{selectedTags.length === 0 && !selectedRouteId}}">请选择兴趣点</text>
+        </view>
+        <text class="dock-chevron">{{dockExpanded ? '˄' : '˅'}}</text>
+      </view>
+      <view class="dock-action" bindtap="onNextStep">
+        <text class="dock-action-text">下一步</text>
+        <text class="dock-action-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Route Selection Dialog -->
+  <view class="sheet-mask" wx:if="{{showRouteDialog}}" bindtap="onRouteDialogClose"></view>
+  <view class="sheet" wx:if="{{showRouteDialog}}">
+    <view class="sheet-handle"></view>
+    <view class="sheet-header">
+      <text class="sheet-title">经典路线</text>
+      <text class="sheet-close" bindtap="onRouteDialogClose">×</text>
+    </view>
+    <view class="sheet-body">
+      <view 
+        class="sheet-item {{selectedRouteId === item.id ? 'selected' : ''}}"
+        wx:for="{{fixedRoutes}}"
+        wx:key="id"
+        bindtap="onRouteItemTap"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+      >
+        <text class="sheet-item-name">{{item.name}}</text>
+        <text class="sheet-item-desc">{{item.desc}}</text>
+      </view>
+    </view>
+    <view class="sheet-actions">
+      <view class="sheet-action" bindtap="onRouteDialogClose">取消</view>
+    </view>
+  </view>
+
+  <!-- Text Input Modal -->
+  <view class="sheet-mask" wx:if="{{showTextModal}}" bindtap="onModalClose"></view>
+  <view class="sheet" wx:if="{{showTextModal}}">
+    <view class="sheet-handle"></view>
+    <view class="sheet-header">
+      <text class="sheet-title">自由输入</text>
+      <text class="sheet-close" bindtap="onModalClose">×</text>
+    </view>
+    <view class="sheet-body">
+      <textarea 
+        class="sheet-input" 
+        placeholder="例如：想找个安静的茶馆，顺便逛历史建筑..."
+        value="{{userTextInput}}"
+        bindinput="onTextInput"
+        maxlength="500"
+      ></textarea>
+    </view>
+    <view class="sheet-actions">
+      <view class="sheet-action primary" bindtap="onModalConfirm">确定</view>
+    </view>
+  </view>
+</view>

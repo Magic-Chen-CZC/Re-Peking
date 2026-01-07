@@ -1,0 +1,39 @@
+<view 
+  class="ticket-container {{isFocused ? 'focused' : ''}}" 
+  style="transform: translate({{safeLayout.x}}px, {{isFocused ? safeLayout.y - 15 : safeLayout.y}}px) rotate({{isFocused ? 0 : safeLayout.rotate}}deg) scale(1); z-index: {{isFocused ? 100 : 1}}; margin-top: {{index === 0 ? 0 : -50}}px;"
+  bindtap="onTap"
+  bindlongpress="onLongPress"
+>
+  <!-- Left Stub -->
+  <view class="stub-section {{theme.bg}}">
+    <view class="stub-hole-top"></view>
+    
+    <view class="stub-meta">
+      {{post.timestamp || "ARCHIVED"}}
+    </view>
+    
+    <view class="stub-archetype {{theme.text}}">
+      {{post.archetype}}
+    </view>
+    
+    <view class="stub-pattern"></view>
+  </view>
+
+  <!-- Right Content -->
+  <view class="content-section">
+    <view class="content-header">
+      <text class="post-title">{{post.title}}</text>
+    </view>
+    
+    <view class="content-image-area">
+      <image src="{{post.imageUrl}}" mode="aspectFill" class="post-image" bindError="onImageError"></image>
+      <view class="image-gradient"></view>
+    </view>
+  </view>
+
+  <!-- Notches -->
+  <view class="notch left"></view>
+  <view class="notch top"></view>
+  <view class="notch bottom"></view>
+  <view class="notch right"></view>
+</view>

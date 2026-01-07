@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+langgraph
+langchain
+langchain-community
+dashscope
+pydantic
+python-dotenv
+requests
+llama-index-core
+llama-index-llms-dashscope
+llama-index-embeddings-dashscope
+alembic
+sqlalchemy
+psycopg2-binary

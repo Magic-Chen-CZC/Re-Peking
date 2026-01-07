@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "分享到社区",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": false,
+  "disableScroll": true,
+  "usingComponents": {}
+}

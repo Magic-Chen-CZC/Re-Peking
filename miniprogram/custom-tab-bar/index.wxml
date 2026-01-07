@@ -1,0 +1,12 @@
+<view class="tab-bar">
+  <view class="tab-bar-border"></view>
+  <view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+    <view class="tab-icon {{selected === index ? 'active' : ''}}">
+      <!-- Simple CSS Icons for now since we don't have image assets yet -->
+      <view wx:if="{{index === 0}}" class="icon-plan"></view>
+      <view wx:if="{{index === 1}}" class="icon-map"></view>
+      <view wx:if="{{index === 2}}" class="icon-share"></view>
+    </view>
+    <view class="tab-text" style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</view>
+  </view>
+</view>

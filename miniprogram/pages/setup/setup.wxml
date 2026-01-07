@@ -1,0 +1,96 @@
+<view class="container">
+  <!-- Background -->
+  <image class="bg-image" src="/image/bg-texture.png" mode="aspectFill"></image>
+  <view class="gradient-overlay theme-{{mbtiTheme}}"></view>
+
+  <!-- MBTI Badge (Outside Card) -->
+  <view class="mbti-badge-container">
+    <view class="mbti-badge theme-{{mbtiTheme}}">
+      <text>{{mbtiCode || '默认风格'}}</text>
+    </view>
+    <text class="mbti-subtitle">{{mbtiName}} 的京城探索</text>
+  </view>
+
+  <!-- Persona Card (Interests List) -->
+  <view class="persona-card theme-{{mbtiTheme}}">
+    <view class="card-header">
+      <text>已锁定的兴趣点</text>
+    </view>
+    
+    <!-- Interests List -->
+    <view class="interests-list">
+      <!-- Selected Tags -->
+      <view class="interest-item" wx:for="{{selectedTags}}" wx:key="id">
+        <view class="interest-icon">📍</view>
+        <text class="interest-name">{{item.name}}</text>
+      </view>
+      <!-- Selected Route -->
+      <view class="interest-item route-item" wx:if="{{selectedRouteName}}">
+        <view class="interest-icon">🗺️</view>
+        <text class="interest-name">{{selectedRouteName}}</text>
+      </view>
+      <!-- User Text -->
+      <view class="interest-item text-item" wx:if="{{userTextInput}}">
+        <view class="interest-icon">💬</view>
+        <text class="interest-name">"{{userTextInput}}"</text>
+      </view>
+      <!-- Empty State -->
+      <view class="empty-state" wx:if="{{selectedTags.length === 0 && !selectedRouteName && !userTextInput}}">
+        <text>暂无选择，请返回上一页添加</text>
+      </view>
+    </view>
+  </view>
+
+
+
+  <!-- Preferences Section -->
+  <view class="preferences-section">
+    <!-- Time Duration -->
+    <view class="pref-group">
+      <text class="pref-label">行程时长</text>
+      <view class="pref-cards">
+        <view 
+          class="pref-card {{timeBudget === 'half' ? 'selected' : ''}}"
+          bindtap="onTimeSelect"
+          data-value="half"
+        >
+          <text class="pref-card-title">半日闲 (3-4h)</text>
+        </view>
+        <view 
+          class="pref-card {{timeBudget === 'full' ? 'selected' : ''}}"
+          bindtap="onTimeSelect"
+          data-value="full"
+        >
+          <text class="pref-card-title">全日游 (6-8h)</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Transportation -->
+    <view class="pref-group">
+      <text class="pref-label">出行方式</text>
+      <view class="pref-cards">
+        <view 
+          class="pref-card {{transportation === 'walk' ? 'selected' : ''}}"
+          bindtap="onTransportSelect"
+          data-value="walk"
+        >
+          <text class="pref-card-title">漫步 Citywalk</text>
+        </view>
+        <view 
+          class="pref-card {{transportation === 'car' ? 'selected' : ''}}"
+          bindtap="onTransportSelect"
+          data-value="car"
+        >
+          <text class="pref-card-title">车行高效打卡</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Submit Button -->
+  <view class="submit-btn {{isLoading ? 'loading' : ''}}" bindtap="onSubmit">
+    <text wx:if="{{!isLoading}}">生成专属路线</text>
+    <text wx:else>生成中...</text>
+  </view>
+</view>
